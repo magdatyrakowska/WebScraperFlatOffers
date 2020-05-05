@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-bar w3-black">
+    <a th:href="@{/}" class="w3-bar-item w3-button">Start</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button">Wybierz opcje</a>
+</div>
+
+<div class="w3-container">
+    <h1>Wynik wyszukiwania</h1>
+    <h3>Parametry wyszukiwania:</h3>
+    <ul class="w3-ul">
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <table class="w3-table w3-bordered">
+        <h3>Uzyskane wyniki:</h3>
+        <tr>
+            <td>ilość ofert</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cena minimalna</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cena maksymalna</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>średnia</td>
+            <td th:text="${average}"></td>
+        </tr>
+    </table>
+
+</div>
+
+<div class="w3-container">
+    <a th:href="@{/options}" class="w3-button w3-black">Wybierz opcje ponownie</a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-bar w3-black">
+    <a th:href="@{/}" class="w3-bar-item w3-button">Start</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button w3-grey">Wybierz opcje</a>
+</div>
+
+<div class="w3-container">
+    <form method="POST">
+        <h2>Opcje przeszukiwania ofert</h2>
+        <h3>Wybierz wielkość mieszkania:</h3>
+
+        <p><button type="submit" class="w3-btn w3-black">Wyślij</button></p>
+    </form>
+</div>
+
+
+
+
+</body>
+</html>
