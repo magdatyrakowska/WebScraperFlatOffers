@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>WebScrapper Flat Offers - start</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
 
 <div class="w3-bar w3-black">
-    <a th:href="@{/}" class="w3-bar-item w3-button w3-grey">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button">Wybierz opcje</a>
+    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <span th:if="__${#locale}__=='en'">
+    <a th:href="@{/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
+    <span th:if="__${#locale}__=='pl'">
+        <a th:href="@{/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
 </div>
 
 <div class="w3-container">
-    <h1>Zestawienie ofert wynajmu mieszkań</h1>
-    <p>Poniższa strona umożliwia zestawienie cen ofert wynajmu mieszkań w Toruniu.</p>
-    <p>Działanie strony opiera się o przeszukiwanie stron popularnego portalu z ofertami Olx.</p>
-    <p>Ustaw parametry wyszukiwania i sprawdź wynik:</p>
+    <h1 th:text="#{home.title}">Zestawienie ofert wynajmu mieszkań</h1>
+    <p th:text="#{home.description}">Poniższa strona umożliwia zestawienie cen ofert wynajmu mieszkań w Toruniu. Działanie strony opiera się o przeszukiwanie stron popularnego portalu z ofertami Olx.</p>
+    <p th:text="#{home.descritption2}">Ustaw parametry wyszukiwania i sprawdź wynik:</p>
 </div>
 
 <div class="w3-container">
-    <a th:href="@{/options}" class="w3-button w3-black">Wybierz opcje</a>
+    <a th:href="@{/options}" class="w3-button w3-black" th:text="#{home.choose}">Wybierz opcje</a>
 </div>
-
 
 </body>
 </html>
