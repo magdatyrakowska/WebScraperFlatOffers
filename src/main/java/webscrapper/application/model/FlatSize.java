@@ -2,20 +2,26 @@ package webscrapper.application.model;
 
 
 public enum FlatSize {
-    ALL_SIZES("wszystkie"),
-    ONE_ROOM("kawalerka"),
-    TWO_ROOMS("2 pokoje"),
-    THREE_ROOMS("3 pokoje"),
-    FOUR_ROOMS_AND_MORE( "4 i więcej pokoi");
+    ALL_SIZES("wszystkie", "all"),
+    ONE_ROOM("kawalerka", "studio"),
+    TWO_ROOMS("2 pokoje", "2 rooms"),
+    THREE_ROOMS("3 pokoje", "3 rooms"),
+    FOUR_ROOMS_AND_MORE( "4 i więcej pokoi", "4 and more rooms");
 
-    private final String displayValue;
+    private final String displayValuePl;
+    private final String displayValueEng;
 
 
-    FlatSize(String displayValue) {
-        this.displayValue = displayValue;
+    FlatSize(String displayValuePl, String displayValueEng) {
+        this.displayValuePl = displayValuePl;
+        this.displayValueEng = displayValueEng;
     }
 
-    public String getDisplayValue() {
-        return displayValue;
+    public String getDisplayValuePl() {
+        return displayValuePl;
+    }
+
+    public String getDisplayValueEng() {
+        return displayValueEng;
     }
 }

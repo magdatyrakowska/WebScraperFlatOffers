@@ -6,13 +6,17 @@
 <body>
 
 <div class="w3-bar w3-black">
-    <a th:href="@{/}" class="w3-bar-item w3-button">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button">Wybierz opcje</a>
+    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <span th:if="__${#locale}__=='en'">
+    <a th:href="@{/result/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
+    <span th:if="__${#locale}__=='pl'">
+        <a th:href="@{/result/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
 </div>
 
 <div class="w3-container">
-    <h1>Wynik wyszukiwania</h1>
-    <h3>Parametry wyszukiwania:</h3>
+    <h1 th:text="#{result.title}">Wynik wyszukiwania</h1>
+    <h3 th:text="#{result.parameters}">Parametry wyszukiwania:</h3>
     <ul class="w3-ul">
         <li></li>
         <li></li>
@@ -20,21 +24,21 @@
     </ul>
 
     <table class="w3-table w3-bordered">
-        <h3>Uzyskane wyniki:</h3>
+        <h3 th:text="#{result.obtained}">Uzyskane wyniki:</h3>
         <tr>
-            <td>ilość ofert</td>
+            <td th:text="#{result.numberOfOffers}">ilość ofert</td>
             <td></td>
         </tr>
         <tr>
-            <td>cena minimalna</td>
+            <td th:text="#{result.minPrice}">cena minimalna</td>
             <td></td>
         </tr>
         <tr>
-            <td>cena maksymalna</td>
+            <td th:text="#{result.maxPrice}">cena maksymalna</td>
             <td></td>
         </tr>
         <tr>
-            <td>średnia</td>
+            <td th:text="#{result.average}">średnia</td>
             <td></td>
         </tr>
     </table>
@@ -42,7 +46,7 @@
 </div>
 
 <div class="w3-container">
-    <a th:href="@{/options}" class="w3-button w3-black">Wybierz opcje ponownie</a>
+    <a th:href="@{/options}" class="w3-button w3-black" th:text="#{result.chooseAgain}">Wybierz opcje ponownie</a>
 </div>
 
 

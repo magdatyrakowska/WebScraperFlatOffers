@@ -6,19 +6,28 @@
 <body>
 
 <div class="w3-bar w3-black">
-    <a th:href="@{/}" class="w3-bar-item w3-button">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button w3-grey">Wybierz opcje</a>
+    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <span th:if="__${#locale}__=='en'">
+    <a th:href="@{/options/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
+    <span th:if="__${#locale}__=='pl'">
+        <a th:href="@{/options/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
 </div>
 
 <div class="w3-container">
     <form method="POST" th:object="${optionsmodel}">
-        <h2>Opcje przeszukiwania ofert</h2>
-        <h3>Wybierz wielkość mieszkania:</h3>
+        <h2 th:text="#{options.title}">Opcje przeszukiwania ofert</h2>
+        <h3 th:text="#{options.size}">Wielkość mieszkania:</h3>
             <div th:each="flatSize : ${flatSizes}" id="getFlatSize" th:field="*{flatSize}">
                 <input class="w3-radio" type="radio" name="flatSizes" th:value="${flatSize}"/>
-                <label th:text="${flatSize.displayValue}"></label>
+                <span th:if="__${#locale}__=='en'">
+                    <label th:text="${flatSize.displayValueEng}"></label>
+                </span>
+                <span th:if="__${#locale}__=='pl'">
+                    <label th:text="${flatSize.displayValuePl}"></label>
+                </span>
             </div>
-        <p><button type="submit" class="w3-btn w3-black">Wyślij</button></p>
+        <p><button type="submit" class="w3-btn w3-black" th:text="#{options.send}">Wyślij</button></p>
     </form>
 </div>
 
