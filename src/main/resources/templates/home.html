@@ -7,7 +7,7 @@
 
 <div class="w3-bar w3-black">
     <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <a th:href="@{/optionsForm}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
     <span th:if="__${#locale}__=='en'">
     <a th:href="@{/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
     <span th:if="__${#locale}__=='pl'">

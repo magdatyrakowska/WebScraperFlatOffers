@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>WebScrapper Flat Offers - options</title>
+<title>WebScrapper Flat Offers - optionsForm</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
 
 <div class="w3-bar w3-black">
     <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <a th:href="@{/optionsForm}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
     <span th:if="__${#locale}__=='en'">
-    <a th:href="@{/options/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
+    <a th:href="@{/optionsForm/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
     <span th:if="__${#locale}__=='pl'">
-        <a th:href="@{/options/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
+        <a th:href="@{/optionsForm/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
 </div>
 
 <div class="w3-container">
     <form method="POST" th:object="${optionsmodel}">
-        <h2 th:text="#{options.title}">Opcje przeszukiwania ofert</h2>
-        <h3 th:text="#{options.size}">Wielkość mieszkania:</h3>
+        <h2 th:text="#{optionsForm.title}">Opcje przeszukiwania ofert</h2>
+
+        <h3 th:text="#{optionsForm.size}">Wielkość mieszkania:</h3>
             <div th:each="flatSize : ${flatSizes}" id="getFlatSize" th:field="*{flatSize}">
-                <input class="w3-radio" type="radio" name="flatSizes" th:value="${flatSize}"/>
+                <input class="w3-radio" type="radio" name="flatSize" th:value="${flatSize}"/>
                 <span th:if="__${#locale}__=='en'">
                     <label th:text="${flatSize.displayValueEng}"></label>
                 </span>
@@ -27,7 +28,9 @@
                     <label th:text="${flatSize.displayValuePl}"></label>
                 </span>
             </div>
-        <p><button type="submit" class="w3-btn w3-black" th:text="#{options.send}">Wyślij</button></p>
+
+
+        <p><button type="submit" class="w3-btn w3-black" th:text="#{optionsForm.send}">Wyślij</button></p>
     </form>
 </div>
 

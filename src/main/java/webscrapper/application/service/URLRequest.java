@@ -1,19 +1,19 @@
 package webscrapper.application.service;
 
 import lombok.Data;
-import webscrapper.application.model.Options;
+import webscrapper.application.model.OptionsForm;
 
 @Data
 public class URLRequest {
 
-    private Options options;
+    private OptionsForm optionsForm;
     private final String base = "https://www.olx.pl/nieruchomosci/mieszkania/wynajem/torun/";
 
 
     public String getURL() {
         String url = base;
 
-        switch(options.getFlatSize()) {
+        switch(optionsForm.getFlatSize()) {
             case ONE_ROOM:
                 url += "?search%5Bfilter_enum_rooms%5D%5B0%5D=one";
                 break;
