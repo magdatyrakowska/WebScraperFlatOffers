@@ -13,6 +13,7 @@ import webscrapper.application.model.FlatSize;
 import webscrapper.application.model.OptionsForm;
 import webscrapper.application.service.OptionsService;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,9 +47,7 @@ public class OptionsController {
     }
 
     @PostMapping
-    public String processRequest(/*@Valid */@ModelAttribute OptionsForm optionsmodel, Errors errors) {
-        String size = optionsmodel.getFlatSize().getDisplayValuePl();
-        log.info("Przetwarzanie obiektu " + size);
+    public String processRequest(@Valid @ModelAttribute("optionsmodel") OptionsForm optionsmodel, Errors errors) {
         if (errors.hasErrors()) {
             return "options";
         } else {

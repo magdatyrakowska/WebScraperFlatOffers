@@ -7,7 +7,7 @@
 
 <div class="w3-bar w3-black">
     <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
-    <a th:href="@{/optionsForm}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
     <span th:if="__${#locale}__=='en'">
     <a th:href="@{/result/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
     <span th:if="__${#locale}__=='pl'">
@@ -18,12 +18,16 @@
     <h1 th:text="#{result.title}">Wynik wyszukiwania</h1>
     <h3 th:text="#{result.parameters}">Parametry wyszukiwania:</h3>
     <ul class="w3-ul">
-        <li><b th:text="#{optionsForm.size} + ': '"></b>
+        <li>
+            <b th:text="#{options.size} + ': '">wielkość_test</b>
             <span th:if="__${#locale}__=='en'" th:text="${options.flatSize.displayValueEng}"></span>
             <span th:if="__${#locale}__=='pl'" th:text="${options.flatSize.displayValuePl}"></span>
 
         </li>
-        <li></li>
+        <li>
+            <b th:text="#{options.city} + ': '">miasto_test</b>
+            <span th:text="${options.city}"></span>
+        </li>
         <li></li>
     </ul>
 
@@ -50,7 +54,7 @@
 </div>
 
 <div class="w3-container">
-    <a th:href="@{/optionsForm}" class="w3-button w3-black" th:text="#{result.chooseAgain}">Wybierz opcje ponownie</a>
+    <a th:href="@{/options}" class="w3-button w3-black" th:text="#{result.chooseAgain}">Wybierz opcje ponownie</a>
 </div>
 
 
