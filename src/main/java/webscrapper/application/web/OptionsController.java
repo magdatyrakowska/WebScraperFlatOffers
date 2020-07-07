@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import webscrapper.application.model.FlatSize;
-import webscrapper.application.model.OptionsForm;
-import webscrapper.application.service.OptionsService;
+import webscrapper.application.model.Category;
+import webscrapper.application.model.Form;
+import webscrapper.application.model.SearchOption;
+import webscrapper.application.service.FormService;
+import webscrapper.application.service.SearchOptionsService;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -22,44 +23,52 @@ import java.util.List;
 @RequestMapping("options")
 public class OptionsController {
 
-    OptionsService optionsService;
+    FormService formService;
+    SearchOptionsService searchOptionsService;
 
-    public OptionsController(OptionsService optionsService) {
-        this.optionsService = optionsService;
+    @Autowired
+    public OptionsController(FormService formService, SearchOptionsService searchOptionsService) {
+        this.formService = formService;
+        this.searchOptionsService = searchOptionsService;
+        this.searchOptionsService.populate();
     }
 
+    /*
+        @ModelAttribute("flatSizes")
+        public List<FlatSize> addOptionsToModel(Model model) {
+            List<FlatSize> flatSizes = Arrays.asList(
+                    FlatSize.ALL_SIZES,
+                    FlatSize.ONE_ROOM,
+                    FlatSize.TWO_ROOMS,
+                    FlatSize.THREE_ROOMS,
+                    FlatSize.FOUR_ROOMS_AND_MORE);
+            return flatSizes;
+        }*/
     @ModelAttribute("flatSizes")
-    public List<FlatSize> addOptionsToModel(Model model) {
-        List<FlatSize> flatSizes = Arrays.asList(
-                FlatSize.ALL_SIZES,
-                FlatSize.ONE_ROOM,
-                FlatSize.TWO_ROOMS,
-                FlatSize.THREE_ROOMS,
-                FlatSize.FOUR_ROOMS_AND_MORE);
-        return flatSizes;
+    public List<SearchOption> populateFlatSize(Model model) {
+        return searchOptionsService.findByCategory(Category.FLATSIZE);
     }
+
 
     @GetMapping
     public String showRequestForm(Model model) {
         log.info("showrequestform działa");
-        model.addAttribute("optionsmodel", new OptionsForm());
+        model.addAttribute("form", new Form());
         return "options";
     }
 
     @PostMapping
-    public String processRequest(@Valid @ModelAttribute("optionsmodel") OptionsForm optionsmodel, Errors errors) {
+    public String processRequest(@Valid @ModelAttribute Form form, Errors errors) {
+        log.info("Walidacja obiektu");
         if (errors.hasErrors()) {
+            log.info("jest error");
             return "options";
         } else {
             log.info("Options without error, redirection");
-            optionsService.setOptions(optionsmodel);
+            formService.setForm(form);
             return "redirect:/result";
         }
     }
-
-
-
-
 
 
 }

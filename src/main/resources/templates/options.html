@@ -15,24 +15,26 @@
 </div>
 
 <div class="w3-container">
-    <form method="POST" th:action="@{/options}" th:object="${optionsmodel}">
+    <form method="POST" th:action="@{/options}" th:object="${form}">
         <h2 th:text="#{options.title}">Opcje przeszukiwania ofert_test</h2>
 
-        <h3 th:text="#{options.size}">Wielkość mieszkania_test:</h3>
         <div>
-            <select type="text" name="flatSize" th:field="*{flatSize}">
-                <option th:each="size : ${flatSizes}" th:value="${size}"
-                        th:if="__${#locale}__=='en'"
-                        th:text="${size.getDisplayValueEng()}">all_test</option>
-                <option th:each="size : ${flatSizes}" th:value="${size}"
-                        th:if="__${#locale}__=='pl'"
-                        th:text="${size.getDisplayValuePl()}">all_test</option>
+            <label for="flatSize" th:text="#{options.size}">Wielkość mieszkania_test:</label>
+            <select id="flatSize" th:field="*{flatSizeId}" name="flatSize">
+                <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
+                        th:if="__${#locale}__=='en'" th:text="${size.getNameENG()}">
+                    all_test
+                </option>
+                <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
+                        th:if="__${#locale}__=='pl'" th:text="${size.getNamePl()}">
+                    all_test
+                </option>
             </select>
         </div>
-
-        <h3 th:text="#{options.city}">Miasto_test:</h3>
+        
         <div>
-            <input type="text" th:field="*{city}" name="city"/>
+            <label for="city" th:text="#{options.city}">Miasto_test:</label>
+            <input id="city" type="text" th:field="*{city}" name="city"/>
         </div>
 
         <p><button type="submit" class="w3-btn w3-black" th:text="#{options.send}">Wyślij</button></p>

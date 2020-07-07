@@ -1,13 +1,13 @@
 package webscrapper.application.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import webscrapper.application.model.OptionsForm;
+import webscrapper.application.model.SearchOption;
 import webscrapper.application.service.FlatOffersService;
-import webscrapper.application.service.OptionsService;
+import webscrapper.application.service.FormService;
+import webscrapper.application.service.SearchOptionsService;
 
 @Slf4j
 @Controller
@@ -15,16 +15,18 @@ import webscrapper.application.service.OptionsService;
 public class ResultController {
 
     FlatOffersService flatOffersService;
-    OptionsService optionsService;
+    FormService formService;
+    SearchOptionsService searchOptionsService;
 
-    public ResultController(FlatOffersService flatOffersService, OptionsService optionsService) {
+    public ResultController(FlatOffersService flatOffersService, FormService formService, SearchOptionsService searchOptionsService) {
         this.flatOffersService = flatOffersService;
-        this.optionsService = optionsService;
+        this.formService = formService;
+        this.searchOptionsService = searchOptionsService;
     }
 
     @GetMapping
     public String showResult(Model model) {
-        model.addAttribute("options", optionsService.getOptions());
+        model.addAttribute("formDisplay", formService.getFormDisplay(searchOptionsService));
         log.info("GET poszło do result");
         return "result";
     }

@@ -20,13 +20,13 @@
     <ul class="w3-ul">
         <li>
             <b th:text="#{options.size} + ': '">wielkość_test</b>
-            <span th:if="__${#locale}__=='en'" th:text="${options.flatSize.displayValueEng}"></span>
-            <span th:if="__${#locale}__=='pl'" th:text="${options.flatSize.displayValuePl}"></span>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.flatSize.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.flatSize.getNamePl()}"></span>
 
         </li>
         <li>
             <b th:text="#{options.city} + ': '">miasto_test</b>
-            <span th:text="${options.city}"></span>
+            <span th:text="${formDisplay.city}"></span>
         </li>
         <li></li>
     </ul>

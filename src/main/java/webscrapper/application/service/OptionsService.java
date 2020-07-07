@@ -1,18 +1,18 @@
 package webscrapper.application.service;
 
 import org.springframework.stereotype.Service;
-import webscrapper.application.model.OptionsForm;
+import webscrapper.application.model.Form;
 
 @Service
 public class OptionsService {
 
-    private OptionsForm options;
+    private Form options;
 
-    public OptionsForm getOptions() {
+    public Form getOptions() {
         return options;
     }
 
-    public void setOptions(OptionsForm options) {
+    public void setOptions(Form options) {
         this.options = options;
     }
 }
