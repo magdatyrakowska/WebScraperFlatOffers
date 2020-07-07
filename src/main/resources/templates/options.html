@@ -18,31 +18,36 @@
     <form method="POST" th:action="@{/options}" th:object="${form}">
         <h2 th:text="#{options.title}">Opcje przeszukiwania ofert_test</h2>
 
+        <div class="w3-panel w3-pale-red w3-border" th:if="${#fields.hasErrors()}" th:text="#{options.correct}">
+            correct_test
+        </div>
+
         <div>
             <label for="flatSize" th:text="#{options.size}">Wielkość mieszkania_test:</label>
             <select id="flatSize" th:field="*{flatSizeId}" name="flatSize">
                 <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
                         th:if="__${#locale}__=='en'" th:text="${size.getNameENG()}">
-                    all_test
+                    size_test_en
                 </option>
                 <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
                         th:if="__${#locale}__=='pl'" th:text="${size.getNamePl()}">
-                    all_test
+                    size_test_pl
                 </option>
             </select>
         </div>
-        
+
         <div>
             <label for="city" th:text="#{options.city}">Miasto_test:</label>
-            <input id="city" type="text" th:field="*{city}" name="city"/>
+            <input id="city" type="text" th:field="*{city}" name="city" class="" th:errorclass="w3-pale-red"/>
         </div>
 
-        <p><button type="submit" class="w3-btn w3-black" th:text="#{options.send}">Wyślij</button></p>
+        <p>
+            <button type="submit" class="w3-btn w3-black" th:text="#{options.send}">
+                submit_test
+            </button>
+        </p>
     </form>
 </div>
-
-
-
 
 </body>
 </html>
