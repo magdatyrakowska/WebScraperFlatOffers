@@ -37,6 +37,11 @@
             <span th:if="__${#locale}__=='en'" th:text="${formDisplay.level.getNameENG()}"></span>
             <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.level.getNamePl()}"></span>
         </li>
+        <li>
+            <b th:text="#{options.furnishings} + ': '">umeblowanie_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.furnishings.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.furnishings.getNamePl()}"></span>
+        </li>
     </ul>
 
     <table class="w3-table w3-bordered">

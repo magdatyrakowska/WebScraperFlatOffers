@@ -49,6 +49,7 @@ public class OptionsController {
         model.addAttribute("flatSizes", searchOptionsService.findByCategory(Category.FLAT_SIZE));
         model.addAttribute("buildings", searchOptionsService.findByCategory(Category.BUILDING));
         model.addAttribute("levels", searchOptionsService.findByCategory(Category.LEVEL));
+        model.addAttribute("furnishings", searchOptionsService.findByCategory(Category.FURNISHINGS));
     }
 
 

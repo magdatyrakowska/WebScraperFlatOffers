@@ -65,6 +65,20 @@
         </div>
 
         <div>
+            <label for="furnishings" th:text="#{options.furnishings}">Umeblowanie_test:</label>
+            <select id="furnishings" th:field="*{furnishingsId}" name="furnishin">
+                <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
+                        th:if="__${#locale}__=='en'" th:text="${furn.getNameENG()}">
+                    size_test_en
+                </option>
+                <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
+                        th:if="__${#locale}__=='pl'" th:text="${furn.getNamePl()}">
+                    size_test_pl
+                </option>
+            </select>
+        </div>
+
+        <div>
             <label for="city" th:text="#{options.city}">Miasto_test:</label>
             <input id="city" type="text" th:field="*{city}" name="city" class="" th:errorclass="w3-pale-red"/>
         </div>

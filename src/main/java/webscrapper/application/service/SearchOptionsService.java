@@ -51,6 +51,10 @@ public class SearchOptionsService {
         searchOptions.add(new SearchOption("ABOVE_10", Category.LEVEL, "powyżej 10 piętra", "above 10th floor"));
         searchOptions.add(new SearchOption("ATTIC", Category.LEVEL, "poddasze", "attic"));
 
+        searchOptions.add(new SearchOption("ALL_FURNISHINGS", Category.FURNISHINGS, "wszystkie", "all"));
+        searchOptions.add(new SearchOption("YES_FURNISHED", Category.FURNISHINGS, "tak", "yes"));
+        searchOptions.add(new SearchOption("NO_FURNISHED", Category.FURNISHINGS, "nie", "no"));
+
     }
 
     public List<SearchOption> findAll() {
