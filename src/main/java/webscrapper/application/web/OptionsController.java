@@ -48,6 +48,7 @@ public class OptionsController {
     public void populateFlatSize(Model model) {
         model.addAttribute("flatSizes", searchOptionsService.findByCategory(Category.FLAT_SIZE));
         model.addAttribute("buildings", searchOptionsService.findByCategory(Category.BUILDING));
+        model.addAttribute("levels", searchOptionsService.findByCategory(Category.LEVEL));
     }
 
 

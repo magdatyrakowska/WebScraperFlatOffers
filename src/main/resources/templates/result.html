@@ -32,6 +32,11 @@
             <span th:if="__${#locale}__=='en'" th:text="${formDisplay.building.getNameENG()}"></span>
             <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.building.getNamePl()}"></span>
         </li>
+        <li>
+            <b th:text="#{options.level} + ': '">poziom_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.level.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.level.getNamePl()}"></span>
+        </li>
     </ul>
 
     <table class="w3-table w3-bordered">

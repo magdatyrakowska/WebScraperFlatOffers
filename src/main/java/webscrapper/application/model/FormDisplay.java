@@ -7,6 +7,7 @@ public class FormDisplay {
 
     private SearchOption flatSize;
     private SearchOption building;
+    private SearchOption level;
     private String city;
 
 }

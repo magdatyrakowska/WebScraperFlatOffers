@@ -35,6 +35,22 @@ public class SearchOptionsService {
         searchOptions.add(new SearchOption("LOFT", Category.BUILDING, "loft", "loft"));
         searchOptions.add(new SearchOption("OTHER_BUILDINGS", Category.BUILDING, "pozostałe", "other"));
 
+        searchOptions.add(new SearchOption("ALL_LEVELS", Category.LEVEL, "wszystkie", "all"));
+        searchOptions.add(new SearchOption("BASEMENT", Category.LEVEL, "suterena", "basement"));
+        searchOptions.add(new SearchOption("GROUND_FLOOR", Category.LEVEL, "parter", "ground floor"));
+        searchOptions.add(new SearchOption("1ST_FLOOR", Category.LEVEL, "1 piętro", "1st floor"));
+        searchOptions.add(new SearchOption("2ND_FLOOR", Category.LEVEL, "2 piętro", "2nd floor"));
+        searchOptions.add(new SearchOption("3RD_FLOOR", Category.LEVEL, "3 piętro", "3rd floor"));
+        searchOptions.add(new SearchOption("4TH_FLOOR", Category.LEVEL, "4 piętro", "4th floor"));
+        searchOptions.add(new SearchOption("5TH_FLOOR", Category.LEVEL, "5 piętro", "5th floor"));
+        searchOptions.add(new SearchOption("6TH_FLOOR", Category.LEVEL, "6 piętro", "6th floor"));
+        searchOptions.add(new SearchOption("7TH_FLOOR", Category.LEVEL, "7 piętro", "7th floor"));
+        searchOptions.add(new SearchOption("8TH_FLOOR", Category.LEVEL, "8 piętro", "8th floor"));
+        searchOptions.add(new SearchOption("9TH_FLOOR", Category.LEVEL, "9 piętro", "9th floor"));
+        searchOptions.add(new SearchOption("10TH_FLOOR", Category.LEVEL, "10 piętro", "10th floor"));
+        searchOptions.add(new SearchOption("ABOVE_10", Category.LEVEL, "powyżej 10 piętra", "above 10th floor"));
+        searchOptions.add(new SearchOption("ATTIC", Category.LEVEL, "poddasze", "attic"));
+
     }
 
     public List<SearchOption> findAll() {

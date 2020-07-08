@@ -51,6 +51,20 @@
         </div>
 
         <div>
+            <label for="level" th:text="#{options.level}">Poziom_test:</label>
+            <select id="level" th:field="*{levelId}" name="level">
+                <option th:each="lev : ${levels}" th:value="${lev.getId()}"
+                        th:if="__${#locale}__=='en'" th:text="${lev.getNameENG()}">
+                    size_test_en
+                </option>
+                <option th:each="lev : ${levels}" th:value="${lev.getId()}"
+                        th:if="__${#locale}__=='pl'" th:text="${lev.getNamePl()}">
+                    size_test_pl
+                </option>
+            </select>
+        </div>
+
+        <div>
             <label for="city" th:text="#{options.city}">Miasto_test:</label>
             <input id="city" type="text" th:field="*{city}" name="city" class="" th:errorclass="w3-pale-red"/>
         </div>

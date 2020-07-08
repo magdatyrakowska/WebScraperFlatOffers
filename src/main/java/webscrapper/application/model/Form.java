@@ -9,6 +9,7 @@ public class Form {
 
     private String flatSizeId;
     private String buildingId;
+    private String levelId;
 
     @Pattern(regexp = "([\\D])+")
     private String city;
