@@ -6,7 +6,7 @@ import lombok.Data;
 public class FlatOffer {
 
     private int price;
-    private FlatSize size;
+  //  private FlatSize size;
     private String description;
 
     @Override

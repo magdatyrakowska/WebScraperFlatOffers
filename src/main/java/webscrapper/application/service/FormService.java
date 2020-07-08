@@ -20,6 +20,7 @@ public class FormService {
     public FormDisplay getFormDisplay(SearchOptionsService searchOptionsService) {
         FormDisplay formDisplay = new FormDisplay();
         formDisplay.setFlatSize(searchOptionsService.findById(form.getFlatSizeId()));
+        formDisplay.setBuilding(searchOptionsService.findById(form.getBuildingId()));
         formDisplay.setCity(form.getCity());
 
         return formDisplay;

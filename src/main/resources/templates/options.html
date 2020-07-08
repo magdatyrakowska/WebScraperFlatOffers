@@ -37,6 +37,20 @@
         </div>
 
         <div>
+            <label for="building" th:text="#{options.building}">Rodzaj budynku_test:</label>
+            <select id="building" th:field="*{buildingId}" name="building">
+                <option th:each="build : ${buildings}" th:value="${build.getId()}"
+                        th:if="__${#locale}__=='en'" th:text="${build.getNameENG()}">
+                    size_test_en
+                </option>
+                <option th:each="build : ${buildings}" th:value="${build.getId()}"
+                        th:if="__${#locale}__=='pl'" th:text="${build.getNamePl()}">
+                    size_test_pl
+                </option>
+            </select>
+        </div>
+
+        <div>
             <label for="city" th:text="#{options.city}">Miasto_test:</label>
             <input id="city" type="text" th:field="*{city}" name="city" class="" th:errorclass="w3-pale-red"/>
         </div>

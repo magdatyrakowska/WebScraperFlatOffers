@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 public class Form {
 
     private String flatSizeId;
+    private String buildingId;
 
     @Pattern(regexp = "([\\D])+")
     private String city;

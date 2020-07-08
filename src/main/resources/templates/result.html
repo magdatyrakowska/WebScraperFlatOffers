@@ -22,13 +22,16 @@
             <b th:text="#{options.size} + ': '">wielkość_test</b>
             <span th:if="__${#locale}__=='en'" th:text="${formDisplay.flatSize.getNameENG()}"></span>
             <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.flatSize.getNamePl()}"></span>
-
         </li>
         <li>
             <b th:text="#{options.city} + ': '">miasto_test</b>
             <span th:text="${formDisplay.city}"></span>
         </li>
-        <li></li>
+        <li>
+            <b th:text="#{options.building} + ': '">budynek_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.building.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.building.getNamePl()}"></span>
+        </li>
     </ul>
 
     <table class="w3-table w3-bordered">

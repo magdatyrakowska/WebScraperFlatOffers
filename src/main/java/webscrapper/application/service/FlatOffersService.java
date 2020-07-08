@@ -1,13 +1,13 @@
 package webscrapper.application.service;
 
 import org.springframework.stereotype.Service;
+import webscrapper.application.model.Category;
 import webscrapper.application.model.FlatOffer;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import webscrapper.application.model.FlatSize;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +42,7 @@ public class FlatOffersService {
                 Elements repository = document.getElementsByClass("offer-wrapper");
                 for (Element e : repository) {
                     FlatOffer flatOffer = new FlatOffer();
-                    flatOffer.setSize(FlatSize.ONE_ROOM);
+                  //  flatOffer.setSize(null); //searchOptionService.get....
 
                     flatOffer.setDescription(e.getElementsByClass("title-cell").select("strong").text());
                     flatOffer.setPrice(e.getElementsByClass("price").text());

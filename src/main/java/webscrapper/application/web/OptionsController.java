@@ -44,9 +44,10 @@ public class OptionsController {
                     FlatSize.FOUR_ROOMS_AND_MORE);
             return flatSizes;
         }*/
-    @ModelAttribute("flatSizes")
-    public List<SearchOption> populateFlatSize(Model model) {
-        return searchOptionsService.findByCategory(Category.FLATSIZE);
+    @ModelAttribute
+    public void populateFlatSize(Model model) {
+        model.addAttribute("flatSizes", searchOptionsService.findByCategory(Category.FLAT_SIZE));
+        model.addAttribute("buildings", searchOptionsService.findByCategory(Category.BUILDING));
     }
 
 
