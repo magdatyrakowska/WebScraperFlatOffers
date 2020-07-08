@@ -11,6 +11,8 @@ public class Form {
     private String buildingId;
     private String levelId;
     private String furnishingsId;
+    private String areaFromId;
+    private String areaToId;
 
     @Pattern(regexp = "([\\D])+")
     private String city;

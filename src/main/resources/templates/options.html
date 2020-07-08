@@ -66,13 +66,41 @@
 
         <div>
             <label for="furnishings" th:text="#{options.furnishings}">Umeblowanie_test:</label>
-            <select id="furnishings" th:field="*{furnishingsId}" name="furnishin">
+            <select id="furnishings" th:field="*{furnishingsId}" name="furnishings">
                 <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
                         th:if="__${#locale}__=='en'" th:text="${furn.getNameENG()}">
                     size_test_en
                 </option>
                 <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
                         th:if="__${#locale}__=='pl'" th:text="${furn.getNamePl()}">
+                    size_test_pl
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="areaFrom" th:text="#{options.areaFrom}">Powierzchnia_test:</label>
+            <select id="areaFrom" th:field="*{areaFromId}" name="areaFrom">
+                <option th:each="arFr : ${areas}" th:value="${arFr.getId()}"
+                        th:if="__${#locale}__=='en'" th:text="${arFr.getNameENG()}">
+                    size_test_en
+                </option>
+                <option th:each="arFr : ${areas}" th:value="${arFr.getId()}"
+                        th:if="__${#locale}__=='pl'" th:text="${arFr.getNamePl()}">
+                    size_test_pl
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="areaTo" th:text="#{options.areaTo}">Powierzchnia_test:</label>
+            <select id="areaTo" th:field="*{AreaToId}" name="areaTo">
+                <option th:each="arTo : ${areas}" th:value="${arTo.getId()}"
+                        th:if="__${#locale}__=='en'" th:text="${arTo.getNameENG()}">
+                    size_test_en
+                </option>
+                <option th:each="arTo : ${areas}" th:value="${arTo.getId()}"
+                        th:if="__${#locale}__=='pl'" th:text="${arTo.getNamePl()}">
                     size_test_pl
                 </option>
             </select>

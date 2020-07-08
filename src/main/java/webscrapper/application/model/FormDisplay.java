@@ -9,6 +9,8 @@ public class FormDisplay {
     private SearchOption building;
     private SearchOption level;
     private SearchOption furnishings;
+    private SearchOption areaFrom;
+    private SearchOption areaTo;
     private String city;
 
 }

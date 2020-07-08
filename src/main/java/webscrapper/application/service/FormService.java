@@ -24,6 +24,8 @@ public class FormService {
         formDisplay.setBuilding(searchOptionsService.findById(form.getBuildingId()));
         formDisplay.setLevel(searchOptionsService.findById(form.getLevelId()));
         formDisplay.setFurnishings(searchOptionsService.findById(form.getFurnishingsId()));
+        formDisplay.setAreaFrom(searchOptionsService.findById(form.getAreaFromId()));
+        formDisplay.setAreaTo(searchOptionsService.findById(form.getAreaToId()));
         formDisplay.setCity(form.getCity());
 
         return formDisplay;

@@ -42,6 +42,16 @@
             <span th:if="__${#locale}__=='en'" th:text="${formDisplay.furnishings.getNameENG()}"></span>
             <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.furnishings.getNamePl()}"></span>
         </li>
+        <li>
+            <b th:text="#{options.areaFrom} + ': '">powierzchnia_od_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaFrom.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaFrom.getNamePl()}"></span>
+        </li>
+        <li>
+            <b th:text="#{options.areaTo} + ': '">powierzchnia_do_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaTo.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaTo.getNamePl()}"></span>
+        </li>
     </ul>
 
     <table class="w3-table w3-bordered">

@@ -55,6 +55,17 @@ public class SearchOptionsService {
         searchOptions.add(new SearchOption("YES_FURNISHED", Category.FURNISHINGS, "tak", "yes"));
         searchOptions.add(new SearchOption("NO_FURNISHED", Category.FURNISHINGS, "nie", "no"));
 
+        searchOptions.add(new SearchOption("ANY_AREAS", Category.AREA, "dowolne", "any"));
+        searchOptions.add(new SearchOption("25M2", Category.AREA, "25m\u00B2", "25m\u00B2"));
+        searchOptions.add(new SearchOption("40M2", Category.AREA, "40m\u00B2", "40m\u00B2"));
+        searchOptions.add(new SearchOption("50M2", Category.AREA, "50m\u00B2", "50m\u00B2"));
+        searchOptions.add(new SearchOption("60M2", Category.AREA, "60m\u00B2", "60m\u00B2"));
+        searchOptions.add(new SearchOption("70M2", Category.AREA, "70m\u00B2", "70m\u00B2"));
+        searchOptions.add(new SearchOption("80M2", Category.AREA, "80m\u00B2", "80m\u00B2"));
+        searchOptions.add(new SearchOption("100M2", Category.AREA, "100m\u00B2", "100m\u00B2"));
+        searchOptions.add(new SearchOption("120M2", Category.AREA, "120m\u00B2", "120m\u00B2"));
+        searchOptions.add(new SearchOption("150M2", Category.AREA, "150m\u00B2", "150m\u00B2"));
+
     }
 
     public List<SearchOption> findAll() {

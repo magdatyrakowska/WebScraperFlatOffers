@@ -50,6 +50,7 @@ public class OptionsController {
         model.addAttribute("buildings", searchOptionsService.findByCategory(Category.BUILDING));
         model.addAttribute("levels", searchOptionsService.findByCategory(Category.LEVEL));
         model.addAttribute("furnishings", searchOptionsService.findByCategory(Category.FURNISHINGS));
+        model.addAttribute("areas", searchOptionsService.findByCategory(Category.AREA));
     }
 
 
