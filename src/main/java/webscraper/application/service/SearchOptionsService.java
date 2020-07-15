@@ -1,11 +1,11 @@
-package webscrapper.application.service;
+package webscraper.application.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webscrapper.application.model.Category;
-import webscrapper.application.model.SearchOption;
-import webscrapper.application.model.SearchOptions;
+import webscraper.application.model.Category;
+import webscraper.application.model.SearchOption;
+import webscraper.application.model.SearchOptions;
 
 import java.util.List;
 
@@ -26,14 +26,14 @@ public class SearchOptionsService {
         searchOptions.add(new SearchOption("THREE_ROOMS", Category.FLAT_SIZE, "3 pokoje", "3 rooms"));
         searchOptions.add(new SearchOption("FOUR_ROOMS_AND_MORE", Category.FLAT_SIZE, "4 i więcej pokojów", "4 and more rooms"));
 
-        searchOptions.add(new SearchOption("ALL_BUILDINGS", Category.BUILDING, "wszystkie", "all"));
-        searchOptions.add(new SearchOption("FLAT", Category.BUILDING, "blok", "flat"));
-        searchOptions.add(new SearchOption("TENEMENT", Category.BUILDING, "kamienica", "tenement"));
-        searchOptions.add(new SearchOption("HOUSE", Category.BUILDING, "dom wolnostojący", "house"));
-        searchOptions.add(new SearchOption("ROW_HOUSE", Category.BUILDING, "szeregowiec", "row house"));
-        searchOptions.add(new SearchOption("APARTMENT", Category.BUILDING, "apartamentowiec", "apartment building"));
-        searchOptions.add(new SearchOption("LOFT", Category.BUILDING, "loft", "loft"));
-        searchOptions.add(new SearchOption("OTHER_BUILDINGS", Category.BUILDING, "pozostałe", "other"));
+        searchOptions.add(new SearchOption("all_buildings", Category.BUILDING, "wszystkie", "all"));
+        searchOptions.add(new SearchOption("blok", Category.BUILDING, "blok", "flat"));
+        searchOptions.add(new SearchOption("kamienica", Category.BUILDING, "kamienica", "tenement"));
+        searchOptions.add(new SearchOption("wolnostojacy", Category.BUILDING, "dom wolnostojący", "house"));
+        searchOptions.add(new SearchOption("szeregowiec", Category.BUILDING, "szeregowiec", "row house"));
+        searchOptions.add(new SearchOption("apartamentowiec", Category.BUILDING, "apartamentowiec", "apartment building"));
+        searchOptions.add(new SearchOption("loft", Category.BUILDING, "loft", "loft"));
+        searchOptions.add(new SearchOption("pozostale", Category.BUILDING, "pozostałe", "other"));
 
         searchOptions.add(new SearchOption("ALL_LEVELS", Category.LEVEL, "wszystkie", "all"));
         searchOptions.add(new SearchOption("BASEMENT", Category.LEVEL, "suterena", "basement"));

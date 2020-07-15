@@ -1,13 +1,11 @@
-package webscrapper.application.service;
-
-import org.springframework.stereotype.Service;
-import webscrapper.application.model.Category;
-import webscrapper.application.model.FlatOffer;
+package webscraper.application.service;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
+import webscraper.application.model.FlatOffer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +28,7 @@ public class FlatOffersService {
 
         try {
             String modURL = urlRequest.getURL() + urlPages + pageIndex;
-            document = Jsoup.connect(modURL).get();
+            document = Jsoup.connect(modURL).get(); //tu przekazuję adres URLdla pierwszej storny
             pageIndexMax = Integer.parseInt(
                     document.getElementsByAttributeValue("data-cy", "page-link-last").first().text());
 

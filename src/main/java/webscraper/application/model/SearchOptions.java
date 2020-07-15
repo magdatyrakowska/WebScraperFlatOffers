@@ -1,4 +1,4 @@
-package webscrapper.application.model;
+package webscraper.application.model;
 
 import org.springframework.stereotype.Repository;
 

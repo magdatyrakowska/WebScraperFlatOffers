@@ -1,4 +1,4 @@
-package webscrapper.application.web;
+package webscraper.application.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import webscrapper.application.model.Category;
-import webscrapper.application.model.Form;
-import webscrapper.application.model.SearchOption;
-import webscrapper.application.service.FormService;
-import webscrapper.application.service.SearchOptionsService;
+import webscraper.application.model.Form;
+import webscraper.application.model.Category;
+import webscraper.application.service.FormService;
+import webscraper.application.service.SearchOptionsService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @Controller

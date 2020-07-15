@@ -1,4 +1,4 @@
-package webscrapper.application.web;
+package webscraper.application.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

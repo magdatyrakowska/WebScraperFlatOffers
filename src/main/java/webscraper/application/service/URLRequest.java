@@ -1,7 +1,7 @@
-package webscrapper.application.service;
+package webscraper.application.service;
 
 import lombok.Data;
-import webscrapper.application.model.Form;
+import webscraper.application.model.Form;
 
 @Data
 public class URLRequest {

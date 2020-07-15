@@ -1,8 +1,8 @@
-package webscrapper.application.service;
+package webscraper.application.service;
 
 import org.springframework.stereotype.Service;
-import webscrapper.application.model.Form;
-import webscrapper.application.model.FormDisplay;
+import webscraper.application.model.Form;
+import webscraper.application.model.FormDisplay;
 
 @Service
 public class FormService {
