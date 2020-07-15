@@ -14,4 +14,15 @@ public class FlatOffers {
         this.flatOffers = new ArrayList<>();
     }
 
+    public void add(FlatOffer flatOffer) {
+        flatOffers.add(flatOffer);
+    }
+
+    public List<FlatOffer> all() {
+        return flatOffers;
+    }
+
+    public int size() {
+        return flatOffers.size();
+    }
 }

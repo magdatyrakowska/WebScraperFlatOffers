@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.*;
 
 @Slf4j
@@ -70,5 +71,16 @@ public class URLService {
 
         return queries;
     }
-    
+
+    public boolean isURLValid(String urlS) {
+        try {
+            URL url = new URL(urlS);
+            url.toURI();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
 }

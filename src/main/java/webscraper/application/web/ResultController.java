@@ -4,10 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import webscraper.application.service.FlatOffersService;
-import webscraper.application.service.FormService;
-import webscraper.application.service.SearchOptionsService;
-import webscraper.application.service.URLService;
+import webscraper.application.service.*;
 
 import java.net.URISyntaxException;
 
@@ -16,28 +13,29 @@ import java.net.URISyntaxException;
 @RequestMapping("/result")
 public class ResultController {
 
-    FlatOffersService flatOffersService;
+    WebScraperService webScraperService;
     FormService formService;
     SearchOptionsService searchOptionsService;
-    URLService urlService;
+    FlatOffersService flatOffersService;
 
-    public ResultController(FlatOffersService flatOffersService, FormService formService, SearchOptionsService searchOptionsService, URLService urlService) {
-        this.flatOffersService = flatOffersService;
+    public ResultController(WebScraperService webScraperService, FormService formService, SearchOptionsService searchOptionsService, FlatOffersService flatOffersService) {
+        this.webScraperService = webScraperService;
         this.formService = formService;
         this.searchOptionsService = searchOptionsService;
-        this.urlService = urlService;
+        this.flatOffersService = flatOffersService;
     }
 
     @GetMapping
     public String showResult(Model model) {
         model.addAttribute("formDisplay", formService.getFormDisplay(searchOptionsService));
-        //flatOfferService.search(); // tutaj wywołanie serwisu który dokona przeszukania ofert i wrzuci je do serwisu z wynikiem przeszukiwania
-        //model.addAttribute(searchResults);
+
         try {
-            urlService.buildURL();
+            webScraperService.scrapURL();
         } catch (URISyntaxException e) {
             e.printStackTrace();
+            log.info("web scraper error");
         }
+
         log.info("GET poszło do result");
         return "result";
     }
