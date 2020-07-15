@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -31,16 +30,12 @@ public class URLService {
         pathSegments.add("");
         uriBuilder.setPathSegments(pathSegments);
 
-        if(!formService.getForm().getBuildingId().equals("all_buildings")) {
-            uriBuilder.setParameter("search[filter_enum_builttype][0]", formService.getForm().getBuildingId());
-        }
-        uriBuilder.setParameter("page", "1");
-/*
-        Map<String, String> queries = new HashMap<>();
-        queries.put("search%5Bfilter_enum_floor_select%5D%5B0%5D", formService.getForm().getLevelId());
-        */
+        getQueriesFromForm().entrySet().stream()
+                .forEach(entry -> uriBuilder.addParameter(entry.getKey(), entry.getValue()));
 
-        log.info("url adress: " + uriBuilder.build().toString());
+        uriBuilder.setParameter("page", "1");
+
+        log.info("url address: " + uriBuilder.build().toString());
     }
 
     public String getStringURL() throws URISyntaxException {
@@ -52,7 +47,28 @@ public class URLService {
         return uriBuilder.build().toString();
     }
 
+    private Map<String, String> getQueriesFromForm() {
+        Map<String, String> queries = new HashMap<>();
+        if(!formService.getForm().getLevelId().equals("all_levels")) {
+            queries.put("search[filter_enum_floor_select][0]", formService.getForm().getLevelId());
+        }
+        if(!formService.getForm().getFurnishingsId().equals("all_furnishings")) {
+            queries.put("search[filter_enum_furniture][0]", formService.getForm().getFurnishingsId());
+        }
+        if(!formService.getForm().getBuildingId().equals("all_buildings")) {
+            queries.put("search[filter_enum_builttype][0]", formService.getForm().getBuildingId());
+        }
+        if(!formService.getForm().getAreaFromId().equals("any_areas")) {
+            queries.put("search[filter_float_m:from]", formService.getForm().getAreaFromId());
+        }
+        if(!formService.getForm().getAreaToId().equals("any_areas")) {
+            queries.put("search[filter_float_m:to]", formService.getForm().getAreaToId());
+        }
+        if(!formService.getForm().getFlatSizeId().equals("all_sizes")) {
+            queries.put("search[filter_enum_rooms][0]", formService.getForm().getFlatSizeId());
+        }
 
-
-
+        return queries;
+    }
+    
 }
