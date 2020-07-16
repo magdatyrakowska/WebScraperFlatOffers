@@ -25,6 +25,7 @@ public class WebScraperService {
     }
 
     public void scrapURL() throws URISyntaxException {
+        flatOffersService.clean();
         urlService.buildURL();
 
         int pageIndex = 1;
@@ -33,7 +34,11 @@ public class WebScraperService {
         try {
             String url = urlService.getStringURL();
             document = Jsoup.connect(url).get();
-            pageIndexMax = Integer.parseInt(document.getElementsByAttributeValue("data-cy", "page-link-last").first().text());
+            try {
+                pageIndexMax = Integer.parseInt(document.getElementsByAttributeValue("data-cy", "page-link-last").first().text());
+            } catch (NullPointerException e) {
+                pageIndexMax = 1;
+            }
 
             while (pageIndex <= pageIndexMax) {
 

@@ -31,6 +31,7 @@ public class ResultController {
 
         try {
             webScraperService.scrapURL();
+            model.addAttribute("flatOfferDisplay", flatOffersService.getFlatOfferDisplay());
         } catch (URISyntaxException e) {
             e.printStackTrace();
             log.info("web scraper error");

@@ -19,7 +19,12 @@ public class FlatOffer {
     }
 
     public boolean checkLongTerm() {
-        return (this.price > 600) && !(this.description.toLowerCase().contains("nocleg"));
+        return (this.price > 600)
+                && !(this.description.toLowerCase().contains("nocleg"))
+                && !(this.description.toLowerCase().contains("dzień"))
+                && !(this.description.toLowerCase().contains("dni"))
+                && !(this.description.toLowerCase().contains("tydzień"))
+                && !(this.description.toLowerCase().contains("tygodnie"));
     }
 
 }

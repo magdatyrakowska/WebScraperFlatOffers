@@ -25,4 +25,8 @@ public class FlatOffers {
     public int size() {
         return flatOffers.size();
     }
+
+    public void clean() {
+        flatOffers = new ArrayList<>();
+    }
 }

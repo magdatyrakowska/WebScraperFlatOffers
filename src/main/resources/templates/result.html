@@ -58,19 +58,31 @@
         <h3 th:text="#{result.obtained}">Uzyskane wyniki:</h3>
         <tr>
             <td th:text="#{result.numberOfOffers}">ilość ofert</td>
-            <td></td>
+            <td><span th:text="${flatOfferDisplay.numberOfOffers}">ilosc_test</span></td>
         </tr>
         <tr>
             <td th:text="#{result.minPrice}">cena minimalna</td>
-            <td></td>
+            <td><span th:text="${flatOfferDisplay.minPrice}">min_cena_test</span></td>
         </tr>
         <tr>
             <td th:text="#{result.maxPrice}">cena maksymalna</td>
-            <td></td>
+            <td><span th:text="${flatOfferDisplay.maxPrice}">max_cena_test</span></td>
         </tr>
         <tr>
             <td th:text="#{result.average}">średnia</td>
-            <td></td>
+            <td><span th:text="${flatOfferDisplay.averagePrice}">srednia_cena_test</span></td>
+        </tr>
+        <tr>
+            <td th:text="#{result.mode}">dominanta</td>
+            <td><span th:text="${flatOfferDisplay.modePrice}">dominanta_cena_test</span></td>
+        </tr>
+        <tr>
+            <td th:text="#{result.modeRepetition}">moda</td>
+            <td><span th:text="${flatOfferDisplay.modeRepetition}">dominanta_ilosc_test</span></td>
+        </tr>
+        <tr>
+            <td th:text="#{result.median}">mediana</td>
+            <td><span th:text="${flatOfferDisplay.median}">mediana_test</span></td>
         </tr>
     </table>
 
