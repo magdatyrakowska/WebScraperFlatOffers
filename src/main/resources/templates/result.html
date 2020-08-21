@@ -86,6 +86,33 @@
         </tr>
     </table>
 
+
+    <div>
+        <p>test histogram</p>
+
+        <div id="histogram"></div>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" th:inline="javascript">
+            google.charts.load("current", {packages: ["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var d = [[${data}]];
+                var data = google.visualization.arrayToDataTable(d);
+
+                var options = {
+                    title: 'Rozkład cen wynajmu mieszkań',
+                    legend: {position: 'none'},
+                };
+
+                var chart = new google.visualization.Histogram(document.getElementById('histogram'));
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+
+
 </div>
 
 <div class="w3-container">
@@ -95,3 +122,5 @@
 
 </body>
 </html>
+
+

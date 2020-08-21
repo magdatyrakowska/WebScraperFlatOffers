@@ -3,12 +3,9 @@ package webscraper.application.service;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webscraper.application.model.FlatOffer;
-import webscraper.application.model.FlatOfferDisplay;
-import webscraper.application.model.FlatOffers;
+import webscraper.application.model.*;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,7 +91,7 @@ public class FlatOffersService {
                 priceCurrent = offer.getPrice();
             }
         }
-        return new Pair<Integer, Integer>(priceMode, repetitionMax);
+        return new Pair<>(priceMode, repetitionMax);
     }
 
     private int getMedian() {
@@ -133,4 +130,19 @@ public class FlatOffersService {
 
         return flatOfferDisplay;
     }
+
+    public String[][] getHistogramData() {
+        String[][] data = new String[flatOffers.size() + 1][2];
+        data[0] = new String[] {"Description", "Price"};
+        int i = 1;
+        for (FlatOffer offer : flatOffers.all()) {
+            String description = offer.getDescription();
+            String price = Integer.toString(offer.getPrice());
+            data[i] = new String[] {description, price};
+            i++;
+        }
+        return data;
+    }
+
+
 }

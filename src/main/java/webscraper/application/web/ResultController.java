@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import webscraper.application.model.FlatOfferDisplay;
 import webscraper.application.service.*;
 
 import java.net.URISyntaxException;
@@ -31,7 +32,12 @@ public class ResultController {
 
         try {
             webScraperService.scrapURL();
-            model.addAttribute("flatOfferDisplay", flatOffersService.getFlatOfferDisplay());
+            FlatOfferDisplay flatOfferDisplay = flatOffersService.getFlatOfferDisplay();
+            model.addAttribute("flatOfferDisplay", flatOfferDisplay);
+
+            model.addAttribute("data", flatOffersService.getHistogramData());
+
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
             log.info("web scraper error");
@@ -40,5 +46,6 @@ public class ResultController {
         log.info("GET poszło do result");
         return "result";
     }
+
 
 }
