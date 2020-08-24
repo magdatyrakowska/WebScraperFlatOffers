@@ -27,7 +27,7 @@ public class URLService {
         pathSegments.add("nieruchomosci");
         pathSegments.add("mieszkania");
         pathSegments.add("wynajem");
-        pathSegments.add(formService.getForm().getCity().toLowerCase());
+        pathSegments.add(prepareCityName(formService.getForm().getCity()));
         pathSegments.add("");
         uriBuilder.setPathSegments(pathSegments);
 
@@ -70,6 +70,34 @@ public class URLService {
         }
 
         return queries;
+    }
+
+    private static String prepareCityName(String city) {
+        StringBuilder builder = new StringBuilder();
+        city = city.toLowerCase();
+
+        for (char c : city.toCharArray()) {
+            if (c == 'ą') {
+                builder.append('a');
+            } else if (c == 'ć') {
+                builder.append('c');
+            } else if (c == 'ę') {
+                builder.append('e');
+            } else if (c == 'ł') {
+                builder.append('l');
+            } else if (c == 'ń') {
+                builder.append('n');
+            } else if (c == 'ó') {
+                builder.append('o');
+            } else if (c == 'ś') {
+                builder.append('s');
+            } else if (c == 'ź' || c == 'ż') {
+                builder.append('z');
+            } else {
+                builder.append(c);
+            }
+        }
+        return builder.toString();
     }
 
     public boolean isURLValid(String urlS) {

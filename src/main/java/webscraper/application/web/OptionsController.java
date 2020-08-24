@@ -31,17 +31,7 @@ public class OptionsController {
         this.searchOptionsService.populate();
     }
 
-    /*
-        @ModelAttribute("flatSizes")
-        public List<FlatSize> addOptionsToModel(Model model) {
-            List<FlatSize> flatSizes = Arrays.asList(
-                    FlatSize.ALL_SIZES,
-                    FlatSize.ONE_ROOM,
-                    FlatSize.TWO_ROOMS,
-                    FlatSize.THREE_ROOMS,
-                    FlatSize.FOUR_ROOMS_AND_MORE);
-            return flatSizes;
-        }*/
+
     @ModelAttribute
     public void populateFlatSize(Model model) {
         model.addAttribute("flatSizes", searchOptionsService.findByCategory(Category.FLAT_SIZE));
