@@ -21,7 +21,6 @@ public class FlatOffersService {
 
     public void clean() {
         flatOffers.clean();
-
     }
 
     public void add(FlatOffer flatOffer) {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import webscraper.application.model.FlatOfferDisplay;
 import webscraper.application.service.*;
 
+import javax.print.attribute.standard.PresentationDirection;
 import java.net.URISyntaxException;
 
 @Slf4j
@@ -28,23 +29,27 @@ public class ResultController {
 
     @GetMapping
     public String showResult(Model model) {
-        model.addAttribute("formDisplay", formService.getFormDisplay(searchOptionsService));
+        if (formService.isFormReady()) {
+            model.addAttribute("formDisplay", formService.getFormDisplay(searchOptionsService));
 
-        try {
-            webScraperService.scrapURL();
-            FlatOfferDisplay flatOfferDisplay = flatOffersService.getFlatOfferDisplay();
-            model.addAttribute("flatOfferDisplay", flatOfferDisplay);
+            try {
+                webScraperService.scrapURL();
+                FlatOfferDisplay flatOfferDisplay = flatOffersService.getFlatOfferDisplay();
+                model.addAttribute("flatOfferDisplay", flatOfferDisplay);
 
-            model.addAttribute("data", flatOffersService.getHistogramData());
+                model.addAttribute("data", flatOffersService.getHistogramData());
 
 
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            log.info("web scraper error");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+                log.info("web scraper error");
+            }
+
+            log.info("GET poszło do result");
+            return "result";
+        } else {
+            return "redirect:/home";
         }
-
-        log.info("GET poszło do result");
-        return "result";
     }
 
 

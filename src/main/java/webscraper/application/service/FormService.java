@@ -8,6 +8,7 @@ import webscraper.application.model.FormDisplay;
 public class FormService {
 
     private Form form;
+    private boolean formReady = false;
 
     public Form getForm() {
         return form;
@@ -15,6 +16,11 @@ public class FormService {
 
     public void setForm(Form form) {
         this.form = form;
+        formReady = true;
+    }
+
+    public boolean isFormReady() {
+        return formReady;
     }
 
     public FormDisplay getFormDisplay(SearchOptionsService searchOptionsService) {
