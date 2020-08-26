@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>WebScrapper Flat Offers - error</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" >
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-bar w3-black">
+    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <span th:if="__${#locale}__=='en'">
+    <a th:href="@{/error/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
+    <span th:if="__${#locale}__=='pl'">
+        <a th:href="@{/error/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
+</div>
+
+<div class="w3-container">
+    <h1 th:text="#{error.title}">Error page</h1>
+    <p th:text="#{error.description}">Description of error.</p>
+</div>
+
+<div class="w3-container">
+    <a th:href="@{/}" class="w3-button w3-black" th:text="#{home.start}">Start</a>
+</div>
+
+
+</body>
+</html>
