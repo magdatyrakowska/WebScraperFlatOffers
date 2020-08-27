@@ -1,6 +1,5 @@
 package webscraper.application.service;
 
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,22 +28,15 @@ public class WebScraperService {
         flatOffersService.clean();
         urlService.buildURL();
 
-        int pageIndex = 1;
-        int pageIndexMax;
-
         try {
-            String url = urlService.getStringURL();
-            document = Jsoup.connect(url).get();
-            try {
-                pageIndexMax = Integer.parseInt(document.getElementsByAttributeValue("data-cy", "page-link-last").first().text());
-            } catch (NullPointerException e) {
-                pageIndexMax = 1;
-            }
+            document = Jsoup.connect(urlService.getStringURL()).get();
+            String maxPage = document.getElementsByAttributeValue("data-cy", "page-link-last").first().text();
+            urlService.setPageIndexMax(maxPage == null ? 1 : Integer.parseInt(maxPage));
 
-            while (pageIndex <= pageIndexMax) {
+            while (urlService.hasNextPage()) {
 
-                if (pageIndex != 1) {
-                    document = Jsoup.connect(url).get();
+                if (urlService.getPageIndex() != 1) {
+                    document = Jsoup.connect(urlService.getStringURL()).get();
                 }
                 Elements repository = document.getElementsByClass("offer-wrapper");
                 for (Element e : repository) {
@@ -57,9 +49,7 @@ public class WebScraperService {
                         flatOffersService.add(flatOffer);
                     }
                 }
-
-                pageIndex++;
-                url = urlService.getStringURLWithPages(pageIndex);
+                urlService.increasePageIndex();
             }
 
         } catch (IOException e) {

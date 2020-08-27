@@ -1,14 +1,16 @@
 package webscraper.application.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.HttpStatusException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import webscraper.application.model.FlatOfferDisplay;
-import webscraper.application.service.*;
+import webscraper.application.service.FlatOffersService;
+import webscraper.application.service.FormService;
+import webscraper.application.service.SearchOptionsService;
+import webscraper.application.service.WebScraperService;
 
-import javax.print.attribute.standard.PresentationDirection;
 import java.net.URISyntaxException;
 
 @Slf4j
@@ -35,12 +37,8 @@ public class ResultController {
 
             try {
                 webScraperService.scrapURL();
-                FlatOfferDisplay flatOfferDisplay = flatOffersService.getFlatOfferDisplay();
-                model.addAttribute("flatOfferDisplay", flatOfferDisplay);
-
+                model.addAttribute("flatOfferDisplay", flatOffersService.getFlatOfferDisplay());
                 model.addAttribute("data", flatOffersService.getHistogramData());
-
-
             } catch (URISyntaxException e) {
                 e.printStackTrace();
                 log.info("web scraper error");

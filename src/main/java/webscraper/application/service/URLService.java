@@ -15,14 +15,16 @@ public class URLService {
 
     private URIBuilder uriBuilder;
     private FormService formService;
+    private int pageIndex;
+    private int pageIndexMax;
 
     @Autowired
-    public URLService(FormService formService) throws URISyntaxException {
+    public URLService(FormService formService) {
         this.formService = formService;
-        this.uriBuilder = new URIBuilder("https://www.olx.pl");
     }
 
     public void buildURL() throws URISyntaxException {
+        uriBuilder = new URIBuilder("https://www.olx.pl");
         List<String> pathSegments = new ArrayList<>();
         pathSegments.add("nieruchomosci");
         pathSegments.add("mieszkania");
@@ -31,10 +33,13 @@ public class URLService {
         pathSegments.add("");
         uriBuilder.setPathSegments(pathSegments);
 
-        getQueriesFromForm().entrySet().stream()
+        getQueriesFromForm().entrySet()
+                .stream()
                 .forEach(entry -> uriBuilder.addParameter(entry.getKey(), entry.getValue()));
 
-        uriBuilder.setParameter("page", "1");
+        pageIndex = 1;
+        pageIndexMax = 1;
+        uriBuilder.setParameter("page", Integer.toString(pageIndex));
 
         log.info("url address: " + uriBuilder.build().toString());
     }
@@ -43,9 +48,21 @@ public class URLService {
         return uriBuilder.build().toString();
     }
 
-    public String getStringURLWithPages(int page) throws URISyntaxException {
-        uriBuilder.setParameter("page", Integer.valueOf(2).toString());
-        return uriBuilder.build().toString();
+    public int getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndexMax(int pageIndexMax) {
+        this.pageIndexMax = pageIndexMax;
+    }
+
+    public boolean hasNextPage() {
+        return pageIndex <= pageIndexMax;
+    }
+
+    public void increasePageIndex() {
+        pageIndex++;
+        uriBuilder.setParameter("page", Integer.toString(pageIndex));
     }
 
     private Map<String, String> getQueriesFromForm() {
@@ -99,16 +116,4 @@ public class URLService {
         }
         return builder.toString();
     }
-
-    public boolean isURLValid(String urlS) {
-        try {
-            URL url = new URL(urlS);
-            url.toURI();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-
 }
