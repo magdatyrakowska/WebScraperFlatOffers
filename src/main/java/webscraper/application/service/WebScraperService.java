@@ -1,5 +1,6 @@
 package webscraper.application.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,6 +12,7 @@ import webscraper.application.model.FlatOffer;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+@Slf4j
 @Service
 public class WebScraperService {
 
@@ -24,12 +26,13 @@ public class WebScraperService {
         this.urlService = urlService;
     }
 
-    public void scrapURL() throws URISyntaxException {
+    public void scrapURL() throws IOException{
         flatOffersService.clean();
-        urlService.buildURL();
 
         try {
+            urlService.buildURL();
             document = Jsoup.connect(urlService.getStringURL()).get();
+
             String maxPage = document.getElementsByAttributeValue("data-cy", "page-link-last").first().text();
             urlService.setPageIndexMax(maxPage == null ? 1 : Integer.parseInt(maxPage));
 
@@ -52,7 +55,7 @@ public class WebScraperService {
                 urlService.increasePageIndex();
             }
 
-        } catch (IOException e) {
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 

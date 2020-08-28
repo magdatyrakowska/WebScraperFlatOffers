@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>WebScrapper Flat Offers - result</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-bar w3-black">
+    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
+    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
+    <span th:if="__${#locale}__=='en'">
+    <a th:href="@{/result/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
+    <span th:if="__${#locale}__=='pl'">
+        <a th:href="@{/result/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
+</div>
+
+<div class="w3-container">
+    <h1 th:text="#{result.title}">Wynik wyszukiwania</h1>
+    <h3 th:text="#{result.parameters}">Parametry wyszukiwania:</h3>
+    <ul class="w3-ul">
+        <li>
+            <b th:text="#{options.size} + ': '">wielkość_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.flatSize.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.flatSize.getNamePl()}"></span>
+        </li>
+        <li>
+            <b th:text="#{options.city} + ': '">miasto_test</b>
+            <span th:text="${formDisplay.city}"></span>
+        </li>
+        <li>
+            <b th:text="#{options.building} + ': '">budynek_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.building.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.building.getNamePl()}"></span>
+        </li>
+        <li>
+            <b th:text="#{options.level} + ': '">poziom_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.level.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.level.getNamePl()}"></span>
+        </li>
+        <li>
+            <b th:text="#{options.furnishings} + ': '">umeblowanie_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.furnishings.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.furnishings.getNamePl()}"></span>
+        </li>
+        <li>
+            <b th:text="#{options.areaFrom} + ': '">powierzchnia_od_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaFrom.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaFrom.getNamePl()}"></span>
+        </li>
+        <li>
+            <b th:text="#{options.areaTo} + ': '">powierzchnia_do_test</b>
+            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaTo.getNameENG()}"></span>
+            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaTo.getNamePl()}"></span>
+        </li>
+    </ul>
+    </div>
+    <div>
+        <p th:text="#{empty_result.description}">No element found. Change search options</p>
+    </div>
+
+    <div class="w3-container">
+        <a th:href="@{/options}" class="w3-button w3-black" th:text="#{result.chooseAgain}">Wybierz opcje ponownie</a>
+    </div>
+
+
+</body>
+</html>
+
+

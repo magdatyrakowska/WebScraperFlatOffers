@@ -5,13 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import webscraper.application.model.FlatOfferDisplay;
 import webscraper.application.service.FlatOffersService;
 import webscraper.application.service.FormService;
 import webscraper.application.service.SearchOptionsService;
 import webscraper.application.service.WebScraperService;
 
-import java.net.URISyntaxException;
+import java.io.IOException;
 
 @Slf4j
 @Controller
@@ -37,15 +36,16 @@ public class ResultController {
 
             try {
                 webScraperService.scrapURL();
+
                 model.addAttribute("flatOfferDisplay", flatOffersService.getFlatOfferDisplay());
                 model.addAttribute("data", flatOffersService.getHistogramData());
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-                log.info("web scraper error");
+
+                log.info("GET poszło do result");
+                return "result";
+            } catch (IOException e) {
+                return "empty_result";
             }
 
-            log.info("GET poszło do result");
-            return "result";
         } else {
             return "redirect:/home";
         }

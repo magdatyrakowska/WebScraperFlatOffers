@@ -18,9 +18,12 @@ public class FlatOffersService {
         this.flatOffers = flatOffers;
     }
 
-
     public void clean() {
         flatOffers.clean();
+    }
+
+    public boolean areAnyOffers() {
+        return flatOffers.size() > 0;
     }
 
     public void add(FlatOffer flatOffer) {
