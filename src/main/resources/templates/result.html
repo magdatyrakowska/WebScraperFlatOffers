@@ -112,6 +112,13 @@
         </script>
     </div>
 
+    <div>
+        <h3>Wszystkie oferty</h3>
+        <p th:each="offer : ${offers}">
+            <a  th:text="${offer.toString()}" th:href="${offer.getUrl()}">test 1</a>
+        </p>
+    </div>
+
 
 </div>
 

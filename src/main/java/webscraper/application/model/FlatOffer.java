@@ -7,6 +7,7 @@ public class FlatOffer {
 
     private int price;
     private String description;
+    private String url;
 
     @Override
     public String toString() {
@@ -16,6 +17,10 @@ public class FlatOffer {
     public void setPrice(String price) {
         price = price.replaceAll(" ", "").replaceAll("zł", "");
         this.price = Integer.parseInt(price);
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public boolean checkLongTerm() {

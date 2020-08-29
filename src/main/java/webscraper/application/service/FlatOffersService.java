@@ -147,4 +147,10 @@ public class FlatOffersService {
     }
 
 
+    public List<FlatOffer> getOffersList() {
+        return flatOffers.all()
+                .stream()
+                .sorted(Comparator.comparingInt(FlatOffer::getPrice))
+                .collect(Collectors.toList());
+    }
 }

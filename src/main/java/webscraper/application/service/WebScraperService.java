@@ -47,6 +47,7 @@ public class WebScraperService {
 
                     flatOffer.setDescription(e.getElementsByClass("title-cell").select("strong").text());
                     flatOffer.setPrice(e.getElementsByClass("price").text());
+                    flatOffer.setUrl(e.getElementsByClass("title-cell").select("a").attr("href"));
 
                     if (flatOffersService.isNotRepeatedAndCorrect(flatOffer)) {
                         flatOffersService.add(flatOffer);

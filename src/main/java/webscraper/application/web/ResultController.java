@@ -39,6 +39,7 @@ public class ResultController {
 
                 model.addAttribute("flatOfferDisplay", flatOffersService.getFlatOfferDisplay());
                 model.addAttribute("data", flatOffersService.getHistogramData());
+                model.addAttribute("offers", flatOffersService.getOffersList());
 
                 log.info("GET poszło do result");
                 return "result";
