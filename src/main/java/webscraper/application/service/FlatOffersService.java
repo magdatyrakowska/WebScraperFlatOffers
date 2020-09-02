@@ -8,70 +8,125 @@ import webscraper.application.model.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Manages repository with flat offers.
+ * Allows to add new offers, get list with all offers and remove them (clean).
+ * Checks, if the offers are correct. Counts simple statistic data (i.e. average, median).
+ * Can repeat processed data to be send to model layer: histogram and statistic data.
+ */
 @Service
 public class FlatOffersService {
 
-    FlatOffers flatOffers;
+    /**
+     * Repository storing {@code FlatOffer} objects
+     */
+    FlatOfferRepository flatOfferRepository;
 
+    /**
+     * Assigns an instance of {@code FlatOfferRepository}
+     *
+     * @param flatOfferRepository instance of {@code FlatOfferRepository} object to be assigned
+     */
     @Autowired
-    public FlatOffersService(FlatOffers flatOffers) {
-        this.flatOffers = flatOffers;
+    public FlatOffersService(FlatOfferRepository flatOfferRepository) {
+        this.flatOfferRepository = flatOfferRepository;
     }
 
+    /**
+     * Cleans the list of flat offers in the repository to enable writing result from a new search
+     */
     public void clean() {
-        flatOffers.clean();
+        flatOfferRepository.clean();
     }
 
-    public boolean areAnyOffers() {
-        return flatOffers.size() > 0;
+    /**
+     * Returns sorted list with all offers in {@code FlatOfferRepostory}.
+     * List is sorted in ascending order according to the price.
+     *
+     * @return sorted list with all flat offers
+     */
+    public List<FlatOffer> findAll() {
+        return flatOfferRepository.all()
+                .stream()
+                .sorted(Comparator.comparingInt(FlatOffer::getPrice))
+                .collect(Collectors.toList());
     }
 
+    /**
+     * Adds given flat offer to the repository after checking,
+     * whether offer is correct and is not a duplicate of any offer from repository,
+     *
+     * @param flatOffer is offer checked and added to the repository
+     */
     public void add(FlatOffer flatOffer) {
-        flatOffers.add(flatOffer);
+        if (isNotRepeatedAndCorrect(flatOffer)) {
+            flatOfferRepository.add(flatOffer);
+        }
     }
 
-    public List<FlatOffer> all() {
-        return flatOffers.all();
-    }
-
-    public boolean isNotRepeatedAndCorrect(FlatOffer flatOffer) {
+    /**
+     * Checks whether offer is correct and is not a duplicate of any offer from repository.
+     *
+     * @param flatOffer is flat offer to be checked
+     * @return {@code true} if offer meets requirements of long term offer
+     * and is not a duplicate; {@code false} in case one of these requirements are not fulfilled
+     */
+    private boolean isNotRepeatedAndCorrect(FlatOffer flatOffer) {
         return flatOffer.checkLongTerm()
-                && flatOffers.all().stream().noneMatch(
+                && flatOfferRepository.all().stream().noneMatch(
                 fo -> fo.getPrice() == flatOffer.getPrice()
                         && fo.getDescription().equals(flatOffer.getDescription()));
     }
 
+    /**
+     * Calculates average price from all offers in the repository and returns it as formatted {@code String}
+     *
+     * @return average price from all offers in a formatted String with precision to 0.01
+     */
     private String getAveragePrice() {
-        printAllToTerminal();
-
-        double average = flatOffers.all()
+        double average = flatOfferRepository.all()
                 .stream()
                 .mapToInt(FlatOffer::getPrice)
                 .average()
                 .getAsDouble();
 
-        System.out.printf("Liczba mieszkań: %d\nśredni koszt: %.2f", flatOffers.size(), average);
         return String.format("%.2f", average);
     }
 
+    /**
+     * Finds minimum price from all flat offers in the repository.
+     *
+     * @return minimum price from all offers
+     */
     private int getMinPrice() {
-        return flatOffers.all()
+        return flatOfferRepository.all()
                 .stream()
                 .mapToInt(FlatOffer::getPrice)
                 .min()
                 .getAsInt();
     }
 
+    /**
+     * Finds maximum price from all flat offers in the repository.
+     *
+     * @return maximum price from all offers
+     */
     private int getMaxPrice() {
-        return flatOffers.all()
+        return flatOfferRepository.all()
                 .stream()
                 .mapToInt(FlatOffer::getPrice)
                 .max()
                 .getAsInt();
     }
 
+    /**
+     * Calculates the most frequent price (mode) and its frequency.
+     *
+     * @return {@code Pair} of two Integers: first number is the most frequent price (mode),
+     * and second number is its frequency.
+     */
     private Pair<Integer, Integer> getModePrice() {
-        List<FlatOffer> sorted = flatOffers.all()
+        List<FlatOffer> sorted = flatOfferRepository.all()
                 .stream()
                 .sorted(Comparator.comparingInt(FlatOffer::getPrice))
                 .collect(Collectors.toList());
@@ -96,10 +151,16 @@ public class FlatOffersService {
         return new Pair<>(priceMode, repetitionMax);
     }
 
+    /**
+     * Finds the median - price standing precisely in the middle of sorted list of prices.
+     * Median divides this list in two equal parts.
+     *
+     * @return price in the middle of sorted offers
+     */
     private int getMedian() {
-        int size = flatOffers.size();
+        int size = flatOfferRepository.size();
 
-        return flatOffers.all().stream()
+        return flatOfferRepository.all().stream()
                 .map(FlatOffer::getPrice)
                 .sorted()
                 .skip(size / 2)
@@ -107,50 +168,48 @@ public class FlatOffersService {
                 .get();
     }
 
-    private void printAllToTerminal() {
-        flatOffers.all()
-                .stream()
-                .sorted(Comparator.comparingInt(FlatOffer::getPrice))
-                .forEach(System.out::println);
-    }
+    /**
+     * Returns object {@code FlatOfferDisplay} containing all statistical data.
+     * Used to send those information to model layer and display on result.html
+     *
+     * @return object {@code FlatOfferDisplay} containing statistical data:
+     * number of offers, minimum and maximum price, median and mode.
+     */
+    public FlatOffersDisplay getFlatOfferDisplay() {
+        FlatOffersDisplay flatOffersDisplay = new FlatOffersDisplay();
 
-
-    public FlatOfferDisplay getFlatOfferDisplay() {
-        FlatOfferDisplay flatOfferDisplay = new FlatOfferDisplay();
-
-        flatOfferDisplay.setNumberOfOffers(flatOffers.size());
-        flatOfferDisplay.setAveragePrice(getAveragePrice());
-        flatOfferDisplay.setMinPrice(getMinPrice());
-        flatOfferDisplay.setMaxPrice(getMaxPrice());
+        flatOffersDisplay.setNumberOfOffers(flatOfferRepository.size());
+        flatOffersDisplay.setAveragePrice(getAveragePrice());
+        flatOffersDisplay.setMinPrice(getMinPrice());
+        flatOffersDisplay.setMaxPrice(getMaxPrice());
 
         Pair<Integer, Integer> mode = getModePrice();
-        flatOfferDisplay.setModePrice(mode.getKey());
-        flatOfferDisplay.setModeRepetition(mode.getValue());
+        flatOffersDisplay.setModePrice(mode.getKey());
+        flatOffersDisplay.setModeRepetition(mode.getValue());
 
-        flatOfferDisplay.setMedian(getMedian());
+        flatOffersDisplay.setMedian(getMedian());
 
-
-        return flatOfferDisplay;
+        return flatOffersDisplay;
     }
 
+    /**
+     * Returns two-dimensional array containing data to be send to model layer
+     * and display on result.html in a histogram graph (prices and descriptions)
+     *
+     * @return two-dimensional array with data for histogram, containing prices
+     * and descriptions
+     */
     public String[][] getHistogramData() {
-        String[][] data = new String[flatOffers.size() + 1][2];
-        data[0] = new String[] {"Description", "Price"};
+        String[][] data = new String[flatOfferRepository.size() + 1][2];
+        data[0] = new String[]{"Description", "Price"};
         int i = 1;
-        for (FlatOffer offer : flatOffers.all()) {
+        for (FlatOffer offer : flatOfferRepository.all()) {
             String description = offer.getDescription();
             String price = Integer.toString(offer.getPrice());
-            data[i] = new String[] {description, price};
+            data[i] = new String[]{description, price};
             i++;
         }
         return data;
     }
 
-
-    public List<FlatOffer> getOffersList() {
-        return flatOffers.all()
-                .stream()
-                .sorted(Comparator.comparingInt(FlatOffer::getPrice))
-                .collect(Collectors.toList());
-    }
 }

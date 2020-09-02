@@ -8,6 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+/**
+ * Configuration class used to change local language settings and provide all .html views in two languages.
+ * Settings are adjusted to thymeleaf view engine.
+ */
 @Configuration
 public class MvcConfigurer implements WebMvcConfigurer {
 
