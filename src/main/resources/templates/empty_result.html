@@ -1,69 +1,110 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>WebScrapper Flat Offers - result</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<head>
+    <meta charset="utf-8">
+    <title>Flat offers web scraper - result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
 <body>
 
-<div class="w3-bar w3-black">
-    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
-    <span th:if="__${#locale}__=='en'">
-    <a th:href="@{/result/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
-    <span th:if="__${#locale}__=='pl'">
-        <a th:href="@{/result/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
+    <div class="container">
+
+        <div class="float-left">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" th:text="#{home.start}">Start</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/options}" th:text="#{home.choose}">Wybierz opcje</a>
+                </li>
+            </ul>
+        </div>
+        <div class="float-right">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+				<span th:if="__${#locale}__=='en'">
+					<a th:href="@{/?lang=pl}" class="nav-link">pl</a>
+				</span>
+                    <span th:if="__${#locale}__=='pl'">
+					<a th:href="@{/?lang=en}" class="nav-link">eng</a>
+				</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container pt-3">
+
+    <h1 th:text="#{result.title}" class="display-4">Wynik wyszukiwania</h1>
+
+    <div class="row pt-3 align-items-center">
+
+        <div class="col-sm-6">
+            <h4 th:text="#{result.parameters}">Parametry wyszukiwania:</h4>
+            <table class="table table-hover">
+                <tr>
+                    <td><span th:text="#{options.size} + ': '">wielkość_test</span></td>
+                    <td><span th:if="__${#locale}__=='en'" th:text="${formDisplay.flatSize.getNameENG()}"></span>
+                        <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.flatSize.getNamePl()}"></span></td>
+                </tr>
+                <tr>
+                    <td><span th:text="#{options.city} + ': '">miasto_test</span></td>
+                    <td><span th:text="${formDisplay.city}"></span></td>
+                </tr>
+                <tr>
+                    <td><span th:text="#{options.building} + ': '">budynek_test</span></td>
+                    <td><span th:if="__${#locale}__=='en'" th:text="${formDisplay.building.getNameENG()}"></span>
+                        <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.building.getNamePl()}"></span></td>
+                </tr>
+                <tr>
+                    <td><span th:text="#{options.level} + ': '">poziom_test</span></td>
+                    <td><span th:if="__${#locale}__=='en'" th:text="${formDisplay.level.getNameENG()}"></span>
+                        <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.level.getNamePl()}"></span></td>
+                </tr>
+                <tr>
+                    <td><span th:text="#{options.furnishings} + ': '">umeblowanie_test</span></td>
+                    <td><span th:if="__${#locale}__=='en'" th:text="${formDisplay.furnishings.getNameENG()}"></span>
+                        <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.furnishings.getNamePl()}"></span></td>
+                </tr>
+                <tr>
+                    <td><span th:text="#{options.areaFrom} + ': '">powierzchnia_od_test</span></td>
+                    <td><span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaFrom.getNameENG()}"></span>
+                        <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaFrom.getNamePl()}"></span></td>
+                </tr>
+                <tr>
+                    <td><span th:text="#{options.areaTo} + ': '">powierzchnia_do_test</span></td>
+                    <td><span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaTo.getNameENG()}"></span>
+                        <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaTo.getNamePl()}"></span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="alert alert-danger">
+                <strong th:text="#{empty_result.description}">No element found. Change search options</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="pt-3 text-center">
+        <a th:href="@{/options}" class="btn btn-secondary" th:text="#{result.chooseAgain}">Wybierz opcje ponownie</a>
+    </div>
+
+    <footer class="footer pt-3">
+        <hr>
+
+        <p class="font-weight-lighter">&copy; Magdalena Tyrakowska 2020</p>
+    </footer>
+
 </div>
 
-<div class="w3-container">
-    <h1 th:text="#{result.title}">Wynik wyszukiwania</h1>
-    <h3 th:text="#{result.parameters}">Parametry wyszukiwania:</h3>
-    <ul class="w3-ul">
-        <li>
-            <b th:text="#{options.size} + ': '">wielkość_test</b>
-            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.flatSize.getNameENG()}"></span>
-            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.flatSize.getNamePl()}"></span>
-        </li>
-        <li>
-            <b th:text="#{options.city} + ': '">miasto_test</b>
-            <span th:text="${formDisplay.city}"></span>
-        </li>
-        <li>
-            <b th:text="#{options.building} + ': '">budynek_test</b>
-            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.building.getNameENG()}"></span>
-            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.building.getNamePl()}"></span>
-        </li>
-        <li>
-            <b th:text="#{options.level} + ': '">poziom_test</b>
-            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.level.getNameENG()}"></span>
-            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.level.getNamePl()}"></span>
-        </li>
-        <li>
-            <b th:text="#{options.furnishings} + ': '">umeblowanie_test</b>
-            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.furnishings.getNameENG()}"></span>
-            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.furnishings.getNamePl()}"></span>
-        </li>
-        <li>
-            <b th:text="#{options.areaFrom} + ': '">powierzchnia_od_test</b>
-            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaFrom.getNameENG()}"></span>
-            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaFrom.getNamePl()}"></span>
-        </li>
-        <li>
-            <b th:text="#{options.areaTo} + ': '">powierzchnia_do_test</b>
-            <span th:if="__${#locale}__=='en'" th:text="${formDisplay.areaTo.getNameENG()}"></span>
-            <span th:if="__${#locale}__=='pl'" th:text="${formDisplay.areaTo.getNamePl()}"></span>
-        </li>
-    </ul>
-    </div>
-    <div>
-        <p th:text="#{empty_result.description}">No element found. Change search options</p>
-    </div>
-
-    <div class="w3-container">
-        <a th:href="@{/options}" class="w3-button w3-black" th:text="#{result.chooseAgain}">Wybierz opcje ponownie</a>
-    </div>
-
-
 </body>
+
 </html>
-
-

@@ -1,123 +1,194 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>WebScrapper Flat Offers - options</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<head>
+    <meta charset="utf-8">
+    <title>Flat offers web scraper - options</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
 <body>
 
-<div class="w3-bar w3-black">
-    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
-    <span th:if="__${#locale}__=='en'">
-    <a th:href="@{/options/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
-    <span th:if="__${#locale}__=='pl'">
-        <a th:href="@{/options/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
-</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
+    <div class="container">
 
-<div class="w3-container">
+        <div class="float-left">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" th:text="#{home.start}">Start</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/options}" th:text="#{home.choose}">Wybierz opcje</a>
+                </li>
+            </ul>
+        </div>
+        <div class="float-right">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+				<span th:if="__${#locale}__=='en'">
+					<a th:href="@{/?lang=pl}" class="nav-link">pl</a>
+				</span>
+                    <span th:if="__${#locale}__=='pl'">
+					<a th:href="@{/?lang=en}" class="nav-link">eng</a>
+				</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container pt-3">
     <form method="POST" th:action="@{/options}" th:object="${form}">
+
         <h2 th:text="#{options.title}">Opcje przeszukiwania ofert_test</h2>
 
-        <div class="w3-panel w3-pale-red w3-border" th:if="${#fields.hasErrors()}" th:text="#{options.correct}">
+        <div class="alert alert-danger" th:if="${#fields.hasErrors()}" th:text="#{options.correct}">
             correct_test
         </div>
 
-        <div>
-            <label for="flatSize" th:text="#{options.size}">Wielkość mieszkania_test:</label>
-            <select id="flatSize" th:field="*{flatSizeId}" name="flatSize">
-                <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
-                        th:if="__${#locale}__=='en'" th:text="${size.getNameENG()}">
-                    size_test_en
-                </option>
-                <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
-                        th:if="__${#locale}__=='pl'" th:text="${size.getNamePl()}">
-                    size_test_pl
-                </option>
-            </select>
+        <div class="form-group row pt-3">
+            <label for="flatSize" class="col-sm-3 col-form-label col-form-label-lg text-right" th:text="#{options.size}">
+                Wielkość mieszkania_test:
+            </label>
+            <div class="col-sm-9">
+                <select id="flatSize" th:field="*{flatSizeId}" name="flatSize" class="custom-select mb-3">
+                    <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
+                            th:if="__${#locale}__=='en'" th:text="${size.getNameENG()}">
+                        size_test_en
+                    </option>
+                    <option th:each="size : ${flatSizes}" th:value="${size.getId()}"
+                            th:if="__${#locale}__=='pl'" th:text="${size.getNamePl()}">
+                        size_test_pl
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <label for="building" th:text="#{options.building}">Rodzaj budynku_test:</label>
-            <select id="building" th:field="*{buildingId}" name="building">
-                <option th:each="build : ${buildings}" th:value="${build.getId()}"
-                        th:if="__${#locale}__=='en'" th:text="${build.getNameENG()}">
-                    size_test_en
-                </option>
-                <option th:each="build : ${buildings}" th:value="${build.getId()}"
-                        th:if="__${#locale}__=='pl'" th:text="${build.getNamePl()}">
-                    size_test_pl
-                </option>
-            </select>
+        <div class="form-group row">
+            <label for="building" class="col-sm-3 col-form-label col-form-label-lg text-right" th:text="#{options.building}">
+                Rodzaj budynku_test:
+            </label>
+            <div class="col-sm-9">
+                <select id="building" th:field="*{buildingId}" name="building" class="custom-select mb-3">
+                    <option th:each="build : ${buildings}" th:value="${build.getId()}"
+                            th:if="__${#locale}__=='en'" th:text="${build.getNameENG()}">
+                        size_test_en
+                    </option>
+                    <option th:each="build : ${buildings}" th:value="${build.getId()}"
+                            th:if="__${#locale}__=='pl'" th:text="${build.getNamePl()}">
+                        size_test_pl
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <label for="level" th:text="#{options.level}">Poziom_test:</label>
-            <select id="level" th:field="*{levelId}" name="level">
-                <option th:each="lev : ${levels}" th:value="${lev.getId()}"
-                        th:if="__${#locale}__=='en'" th:text="${lev.getNameENG()}">
-                    size_test_en
-                </option>
-                <option th:each="lev : ${levels}" th:value="${lev.getId()}"
-                        th:if="__${#locale}__=='pl'" th:text="${lev.getNamePl()}">
-                    size_test_pl
-                </option>
-            </select>
+        <div class="form-group row">
+            <label for="level" class="col-sm-3 col-form-label col-form-label-lg text-right" th:text="#{options.level}">
+                Poziom_test:
+            </label>
+            <div class="col-sm-9">
+                <select id="level" th:field="*{levelId}" name="level" class="custom-select mb-3">
+                    <option th:each="lev : ${levels}" th:value="${lev.getId()}"
+                            th:if="__${#locale}__=='en'" th:text="${lev.getNameENG()}">
+                        size_test_en
+                    </option>
+                    <option th:each="lev : ${levels}" th:value="${lev.getId()}"
+                            th:if="__${#locale}__=='pl'" th:text="${lev.getNamePl()}">
+                        size_test_pl
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <label for="furnishings" th:text="#{options.furnishings}">Umeblowanie_test:</label>
-            <select id="furnishings" th:field="*{furnishingsId}" name="furnishings">
-                <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
-                        th:if="__${#locale}__=='en'" th:text="${furn.getNameENG()}">
-                    size_test_en
-                </option>
-                <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
-                        th:if="__${#locale}__=='pl'" th:text="${furn.getNamePl()}">
-                    size_test_pl
-                </option>
-            </select>
+        <div class="form-group row">
+            <label for="furnishings" class="col-sm-3 col-form-label col-form-label-lg text-right" th:text="#{options.furnishings}">
+                Umeblowanie_test:
+            </label>
+            <div class="col-sm-9">
+                <select id="furnishings" th:field="*{furnishingsId}" name="furnishings" class="custom-select mb-3">
+                    <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
+                            th:if="__${#locale}__=='en'" th:text="${furn.getNameENG()}">
+                        size_test_en
+                    </option>
+                    <option th:each="furn : ${furnishings}" th:value="${furn.getId()}"
+                            th:if="__${#locale}__=='pl'" th:text="${furn.getNamePl()}">
+                        size_test_pl
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <label for="areaFrom" th:text="#{options.areaFrom}">Powierzchnia_test:</label>
-            <select id="areaFrom" th:field="*{areaFromId}" name="areaFrom">
-                <option th:each="arFr : ${areas}" th:value="${arFr.getId()}"
-                        th:if="__${#locale}__=='en'" th:text="${arFr.getNameENG()}">
-                    size_test_en
-                </option>
-                <option th:each="arFr : ${areas}" th:value="${arFr.getId()}"
-                        th:if="__${#locale}__=='pl'" th:text="${arFr.getNamePl()}">
-                    size_test_pl
-                </option>
-            </select>
+        <div class="form-group row">
+            <label for="areaFrom" class="col-sm-3 col-form-label col-form-label-lg text-right" th:text="#{options.areaFrom}">
+                Powierzchnia_test:
+            </label>
+            <div class="col-sm-9">
+                <select id="areaFrom" th:field="*{areaFromId}" name="areaFrom" class="custom-select mb-3">
+                    <option th:each="arFr : ${areas}" th:value="${arFr.getId()}"
+                            th:if="__${#locale}__=='en'" th:text="${arFr.getNameENG()}">
+                        size_test_en
+                    </option>
+                    <option th:each="arFr : ${areas}" th:value="${arFr.getId()}"
+                            th:if="__${#locale}__=='pl'" th:text="${arFr.getNamePl()}">
+                        size_test_pl
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <label for="areaTo" th:text="#{options.areaTo}">Powierzchnia_test:</label>
-            <select id="areaTo" th:field="*{AreaToId}" name="areaTo">
-                <option th:each="arTo : ${areas}" th:value="${arTo.getId()}"
-                        th:if="__${#locale}__=='en'" th:text="${arTo.getNameENG()}">
-                    size_test_en
-                </option>
-                <option th:each="arTo : ${areas}" th:value="${arTo.getId()}"
-                        th:if="__${#locale}__=='pl'" th:text="${arTo.getNamePl()}">
-                    size_test_pl
-                </option>
-            </select>
+        <div class="form-group row">
+            <label for="areaTo" class="col-sm-3 col-form-label col-form-label-lg text-right" th:text="#{options.areaTo}">
+                Powierzchnia_test:
+            </label>
+            <div class="col-sm-9">
+                <select id="areaTo" th:field="*{AreaToId}" name="areaTo" class="custom-select mb-3">
+                    <option th:each="arTo : ${areas}" th:value="${arTo.getId()}"
+                            th:if="__${#locale}__=='en'" th:text="${arTo.getNameENG()}">
+                        size_test_en
+                    </option>
+                    <option th:each="arTo : ${areas}" th:value="${arTo.getId()}"
+                            th:if="__${#locale}__=='pl'" th:text="${arTo.getNamePl()}">
+                        size_test_pl
+                    </option>
+                </select>
+            </div>
         </div>
 
-        <div>
-            <label for="city" th:text="#{options.city}">Miasto_test:</label>
-            <input id="city" type="text" th:field="*{city}" name="city" class="" th:errorclass="w3-pale-red"/>
+        <div class="form-group row">
+            <label for="city" class="col-sm-3 col-form-label col-form-label-lg text-right" th:text="#{options.city}">
+                Miasto_test:
+            </label>
+            <div class="col-sm-9">
+                <input id="city" type="text" th:field="*{city}" name="city" class="form-control" th:errorclass="form-control"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors()}" th:text="#{options.correctCity}">
+                    correct_test
+                </div>
+            </div>
+
         </div>
 
-        <p>
-            <button type="submit" class="w3-btn w3-black" th:text="#{options.send}">
+        <div class="pt-3 text-center">
+            <p th:text="#{options.warning}">Przeszukiwanie stron może zająć trochę czasu.</p>
+        </div>
+
+        <div class="pt-3 text-center">
+            <button type="submit" class="btn btn-secondary" th:text="#{options.send}">
                 submit_test
             </button>
-        </p>
+        </div>
+
     </form>
+
+
+    <footer class="footer pt-3">
+        <hr>
+
+        <p class="font-weight-lighter">&copy; Magdalena Tyrakowska 2020</p>
+    </footer>
 </div>
 
 </body>
+
 </html>

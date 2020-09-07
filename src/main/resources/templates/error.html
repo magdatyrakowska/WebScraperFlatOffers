@@ -1,28 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>WebScrapper Flat Offers - error</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" >
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<head>
+    <meta charset="utf-8">
+    <title>Flat offers web scraper - result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
 <body>
 
-<div class="w3-bar w3-black">
-    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
-    <span th:if="__${#locale}__=='en'">
-    <a th:href="@{/error/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
-    <span th:if="__${#locale}__=='pl'">
-        <a th:href="@{/error/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
-</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
+    <div class="container">
 
-<div class="w3-container">
-    <h1 th:text="#{error.title}">Error page</h1>
-    <p th:text="#{error.description}">Description of error.</p>
-</div>
+        <div class="float-left">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" th:text="#{home.start}">Start</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/options}" th:text="#{home.choose}">Wybierz opcje</a>
+                </li>
+            </ul>
+        </div>
+        <div class="float-right">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+					<span th:if="__${#locale}__=='en'">
+						<a th:href="@{/?lang=pl}" class="nav-link">pl</a>
+					</span>
+                    <span th:if="__${#locale}__=='pl'">
+						<a th:href="@{/?lang=en}" class="nav-link">eng</a>
+					</span>
+                </li>
+            </ul>
+        </div>
 
-<div class="w3-container">
-    <a th:href="@{/}" class="w3-button w3-black" th:text="#{home.start}">Start</a>
-</div>
+    </div>
+</nav>
 
+
+<div class="container pt-3">
+    <h1 th:text="#{error.title}" class="display-4">Error page</h1>
+
+    <div>
+        <p class="lead" th:text="#{error.description}">Description of error.</p>
+        <p class="lead" th:text="#{error.description2}">Description of error2.</p>
+    </div>
+
+    <div class="pt-3 text-center">
+        <a th:href="@{/}" class="btn btn-secondary" th:text="#{home.start}">Start</a>
+    </div>
+
+    <footer class="footer pt-3">
+        <hr>
+
+        <p class="font-weight-lighter">&copy; Magdalena Tyrakowska 2020</p>
+    </footer>
+
+</div>
 
 </body>
+
 </html>

@@ -1,29 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>WebScrapper Flat Offers - start</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" >
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<head>
+    <meta charset="utf-8">
+    <title>Flat offers web scraper - start</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
 <body>
 
-<div class="w3-bar w3-black">
-    <a th:href="@{/}" class="w3-bar-item w3-button" th:text="#{home.start}">Start</a>
-    <a th:href="@{/options}" class="w3-bar-item w3-button" th:text="#{home.choose}">Wybierz opcje</a>
-    <span th:if="__${#locale}__=='en'">
-    <a th:href="@{/?lang=pl}" class="w3-bar-item w3-button w3-right">pl</a></span>
-    <span th:if="__${#locale}__=='pl'">
-        <a th:href="@{/?lang=en}" class="w3-bar-item w3-button w3-right">eng</a></span>
-</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
+    <div class="container">
 
-<div class="w3-container">
-    <h1 th:text="#{home.title}">Zestawienie ofert wynajmu mieszkań</h1>
-    <p th:text="#{home.description}">Poniższa strona umożliwia zestawienie cen ofert wynajmu mieszkań w Toruniu. Działanie strony opiera się o przeszukiwanie stron popularnego portalu z ofertami Olx.</p>
-    <p th:text="#{home.description2}">Ustaw parametry wyszukiwania i sprawdź wynik:</p>
-</div>
+        <div class="float-left">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" th:text="#{home.start}">Start</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/options}" th:text="#{home.choose}">Wybierz opcje</a>
+                </li>
+            </ul>
+        </div>
+        <div class="float-right">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+					<span th:if="__${#locale}__=='en'">
+						<a th:href="@{/?lang=pl}" class="nav-link">pl</a>
+					</span>
+                    <span th:if="__${#locale}__=='pl'">
+						<a th:href="@{/?lang=en}" class="nav-link">eng</a>
+					</span>
+                </li>
+            </ul>
+        </div>
 
-<div class="w3-container">
-    <a th:href="@{/options}" class="w3-button w3-black" th:text="#{home.choose}">Wybierz opcje</a>
-</div>
+    </div>
+</nav>
 
+<div class="container pt-3">
+    <div class="jumbotron">
+
+        <h1 class="display-3" th:text="#{home.title}">Zestawienie ofert wynajmu mieszkań</h1>
+        <p th:text="#{home.description}">
+            Poniższa strona umożliwia zestawienie cen ofert wynajmu mieszkań w Toruniu.
+            Działanie strony opiera się o przeszukiwanie stron popularnego portalu z ofertami <a href="https://www.olx.pl">olx.pl</a>.
+        </p>
+        <p th:text="#{home.description2}">
+            Ustaw parametry wyszukiwania i sprawdź wynik:
+        </p>
+        <a th:href="@{/options}" class="btn btn-secondary" th:text="#{home.choose}">Wybierz opcje</a>
+
+    </div>
+
+    <footer class="footer pt-3">
+        <hr>
+
+        <p class="font-weight-lighter">&copy; Magdalena Tyrakowska 2020</p>
+    </footer>
+
+</div>
 
 </body>
+
 </html>
