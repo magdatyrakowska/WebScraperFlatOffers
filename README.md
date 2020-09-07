@@ -26,4 +26,5 @@ To widen application functionality and allow to search through all categories it
 Project allows to use different search options (i.e. city, number of rooms, flat size in square meters) and generate simple one-page summary of all offers. Searching options matches those ones available in olx platform, however they do not allow to use multiple checks (like both two- and three-room flats). Solution might to change radio buttons to checboxes (html elements), however it would require to change also Form class to accept multichooses.
 
 * **scrapping informations directly from web page**
+
 To get data from web pages there is used JSoup library. Thanks to that solution is independent from any limits of the portal, and easy to use. However, to make application more useful and universal it would be a good idea to use olx developer API.
